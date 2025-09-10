@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Basic meta tags for responsiveness and character set -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>serhat yuecel studio</title>
+
+    <!--
+        The Inter font is loaded directly from Google Fonts.
+    -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@700&display=swap" rel="stylesheet">
+
+    <!-- All CSS styling is included here for a self-contained document -->
+    <style>
+        :root {
+            --primary-color: #333;
+            --background-color: #ffffff;
+            --light-grey: #e0e0e0;
+            --black-overlay: rgba(0, 0, 0, 0.7);
+        }
+
+        body {
+            /* Kept the same font as the rest of the body for a unified look */
+            font-family: 'Roboto Slab', serif;
+            background-color: var(--background-color);
+            color: var(--primary-color);
+            margin: 0;
+            padding: 2rem 1rem;
+            line-height: 1.6;
+        }
+
+        header {
+            /* Changed alignment to center */
+            text-align: center;
+            padding-bottom: 1rem;
+        }
+
+        /* Styling for the new logo link */
+        header .logo-link {
+            text-decoration: none;
+            color: #666; /* Default gray color */
+            transition: color 0.3s ease;
+        }
+
+        header .logo-link:hover {
+            color: #000; /* Changes to black on hover */
+        }
+        
+        .logo-text {
+            /* Updated font family, size, and weight for the logo */
+            font-family: 'Inter', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: var(--primary-color);
+            user-select: none;
+        }
+        
+        /* Styles for the main gallery view */
+        .gallery-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            justify-content: center;
+        }
+
+        .artwork-item {
+            position: relative;
+            background: transparent;
+            border-radius: 0;
+            overflow: hidden;
+            box-shadow: none;
+            transition: transform 0.3s ease;
+            text-align: center;
+            cursor: pointer;
+        }
+        
+        .artwork-item:hover {
+            transform: translateY(-5px);
+            box-shadow: none;
+        }
+
+        .artwork-item a {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        /* The key change here: all images now have a fixed height */
+        .artwork-image {
+            width: 100%;
+            height: 300px;
+            object-fit: contain;
+            display: block;
+        }
+
+        .artwork-title {
+            font-weight: 600;
+            font-size: 1.2rem;
+            padding: 1rem 0;
+            user-select: none;
+        }
+
+        /* Styles for the artwork detail page */
+        .artwork-detail {
+            display: none;
+            padding: 2rem;
+            background-color: transparent;
+            border-radius: 0;
+            max-width: 800px;
+            margin: 2rem auto;
+            box-shadow: none;
+        }
+
+        .detail-image {
+            width: 100%;
+            max-height: none;
+            object-fit: contain;
+            margin-bottom: 2rem;
+            height: auto;
+        }
+
+        .detail-info {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 1rem;
+            font-weight: 300;
+        }
+
+        .detail-info h2 {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-top: 0;
+        }
+
+        .back-button {
+            display: block;
+            margin-bottom: 1rem;
+            padding: 0.5rem 1rem;
+            background-color: transparent;
+            border: 1px solid #333;
+            color: #333;
+            text-decoration: none;
+            border-radius: 5px;
+            width: fit-content;
+            transition: background-color 0.3s ease;
+        }
+
+        .back-button:hover {
+            background-color: #f0f0f0;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .gallery {
+                grid-template-columns: 1fr;
+            }
+            .detail-info {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <!-- The logo is now a link that returns to the gallery view -->
+        <h1 class="logo-text">
+            <a href="#" class="logo-link" onclick="showGallery(); return false;">SY</a>
+        </h1>
+    </header>
+
+    <main class="gallery-container">
+        <!-- Main gallery view -->
+        <ul id="main-gallery" class="gallery">
+            <!-- Gallery items will be dynamically generated here -->
+        </ul>
+
+        <!-- Artwork detail view -->
+        <div id="artwork-detail" class="artwork-detail">
+            <!-- Artwork details will be dynamically injected here -->
+        </div>
+    </main>
+
+    <script>
+        // Use a single JavaScript object to hold all artwork data
+        const artworks = {
+            "ts-v-ye": {
+                name: "Taylor Swift v Ye",
+                year: "2025",
+                medium: "Mixed Media on canvas Paper",
+                size: "105cm x 198cm",
+                description: "Eine farbige und skurrile Gegenüberstellung zweier Kontroversen Figuren.",
+                price: "PRICE ON REQUEST"
+            },
+            "wonderful-again": {
+                name: "Make America Wonderful Again",
+                year: "2025",
+                medium: "Mixed Media on Paper",
+                size: "35,5~cm x 27,7~cm",
+                description: "Eine zeichnerische Darstellung dessen, was Amerika von sich selbst denkt.",
+                price: "PRICE ON REQUEST"
+            },
+            "damaged": {
+                name: "Damaged",
+                year: "2025",
+                medium: "Mixed Media on Cotton Board",
+                size: "50cm x 50cm",
+                description: "Eine abstrakte Umsetzung von Trump und seinem „beschädigtem,, Verstand.",
+                price: "PRICE ON REQUEST"
+            },
+            "batman-kills": {
+                name: "BATMAN KILLS",
+                year: "2025",
+                medium: "Mixed Media on Cotton Board",
+                size: "50cm x 50cm",
+                description: "Abbildung eines Emiratischen Geldscheines mit einer Kontroversen Meinung über den Dunklen Ritter.",
+                price: "PRICE ON REQUEST"
+            },
+            "itaped": {
+                name: "iTaped",
+                year: "2025",
+                medium: "Colored Pencils on Cotton Board",
+                size: "50cm x 50cm",
+                description: "Eine experimentelle Umetzung des bekannten „Comedian,,, inspieriert von dessen Banalität und begründet beim nutzen des innovativen und längst vergessenen $,i,$ von Apple.",
+                price: "PRICE ON REQUEST"
+            },
+            "kal-el-no": {
+                name: "KAL EL NO",
+                year: "2025",
+                medium: "Mixed Media on canvas Paper",
+                size: "20cm x 20cm",
+                description: "Gal hate",
+                price: "PRICE ON REQUEST"
+            }
+        };
+
+        // This object holds the links to the images.
+        const imageSources = {
+            "ts-v-ye": {
+                gallery: "https://i.imgur.com/BvtFNyO.jpeg",
+                detail: "https://i.imgur.com/XmvfLin.jpeg"
+            },
+            "wonderful-again": {
+                gallery: "https://i.imgur.com/6zSXpMF.jpeg",
+                detail: "https://i.imgur.com/ko2UzS7.jpeg"
+            },
+            "damaged": {
+                gallery: "https://i.imgur.com/hKaHoP5.jpeg",
+                detail: "https://i.imgur.com/kYtaN1d.jpeg"
+            },
+            "batman-kills": "https://i.imgur.com/BXoqmYY.png",
+            "itaped": "https://i.imgur.com/FCEgD0y.jpeg",
+            "kal-el-no": "https://i.imgur.com/xMnAQsl.jpeg"
+        };
+        
+        // Function to create the HTML for the gallery items
+        function createGalleryItems() {
+            const galleryList = document.getElementById('main-gallery');
+            for (const key in artworks) {
+                const artwork = artworks[key];
+                const listItem = document.createElement('li');
+                listItem.className = 'artwork-item';
+                listItem.setAttribute('data-artwork-id', key);
+
+                // Check if the image source is an object with a 'gallery' property
+                const imageSrc = (typeof imageSources[key] === 'object' && imageSources[key].gallery) 
+                                 ? imageSources[key].gallery 
+                                 : (imageSources[key] || 'https://placehold.co/500x500/A0A0A0/ffffff?text=Image+Not+Found');
+
+                listItem.innerHTML = `
+                    <img src="${imageSrc}" alt="${artwork.name}" class="artwork-image">
+                    <div class="artwork-title">${artwork.name}</div>
+                `;
+                
+                listItem.addEventListener('click', () => showArtworkDetail(key));
+                galleryList.appendChild(listItem);
+            }
+        }
+
+        // Function to show the artwork details
+        function showArtworkDetail(id) {
+            const gallery = document.getElementById('main-gallery');
+            const detailView = document.getElementById('artwork-detail');
+            const artwork = artworks[id];
+
+            if (!artwork) {
+                console.error('Artwork not found for ID:', id);
+                return;
+            }
+
+            // Check if the image source is an object with a 'detail' property
+            const imageSrc = (typeof imageSources[id] === 'object' && imageSources[id].detail) 
+                             ? imageSources[id].detail 
+                             : (imageSources[id] || 'https://placehold.co/500x500/A0A0A0/ffffff?text=Image+Not+Found');
+
+            detailView.innerHTML = `
+                <a href="#" class="back-button" onclick="showGallery(); return false;">&larr; Back to Gallery</a>
+                <img src="${imageSrc}" alt="${artwork.name}" class="detail-image">
+                <h2>${artwork.name}</h2>
+                <div class="detail-info">
+                    <strong>Year:</strong> <span>${artwork.year}</span>
+                    <strong>Medium:</strong> <span>${artwork.medium}</span>
+                    <strong>Size:</strong> <span>${artwork.size}</span>
+                    <strong>Description:</strong> <span>${artwork.description}</span>
+                </div>
+                <div style="margin-top: 1rem; font-weight: 600;">${artwork.price}</div>
+                <div style="margin-top: 0.5rem;"><a href="mailto:serhat02@live.de">Contact serhat02@live.de</a></div>
+            `;
+
+            gallery.style.display = 'none';
+            detailView.style.display = 'block';
+            window.scrollTo(0, 0);
+        }
+
+        // Function to go back to the gallery
+        function showGallery() {
+            const gallery = document.getElementById('main-gallery');
+            const detailView = document.getElementById('artwork-detail');
+            gallery.style.display = 'grid';
+            detailView.style.display = 'none';
+        }
+
+        // Call the function to create the gallery when the page loads
+        document.addEventListener('DOMContentLoaded', createGalleryItems);
+    </script>
+</body>
+</html>
