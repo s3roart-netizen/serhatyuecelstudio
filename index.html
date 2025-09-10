@@ -130,6 +130,7 @@
             object-fit: contain;
             margin-bottom: 2rem;
             height: auto;
+            cursor: pointer; /* Add cursor to indicate it's clickable */
         }
 
         .detail-info {
@@ -162,6 +163,39 @@
             background-color: #f0f0f0;
         }
 
+        /* New styles for the fullscreen viewer */
+        .fullscreen-overlay {
+            display: none; /* Hidden by default */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .fullscreen-image {
+            max-width: 90%;
+            max-height: 90vh;
+            object-fit: contain;
+            cursor: pointer;
+        }
+
+        .close-button {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 2rem;
+            color: #fff;
+            cursor: pointer;
+            user-select: none;
+        }
+        
         /* Responsive adjustments */
         @media (max-width: 768px) {
             .gallery {
@@ -193,6 +227,12 @@
             <!-- Artwork details will be dynamically injected here -->
         </div>
     </main>
+
+    <!-- Fullscreen Image Viewer -->
+    <div id="fullscreen-overlay" class="fullscreen-overlay">
+        <span class="close-button" onclick="closeFullscreenView()">&times;</span>
+        <img id="fullscreen-image" class="fullscreen-image" src="" alt="">
+    </div>
 
     <script>
         // Use a single JavaScript object to hold all artwork data
@@ -307,8 +347,8 @@
                              : (imageSources[id] || 'https://placehold.co/500x500/A0A0A0/ffffff?text=Image+Not+Found');
 
             detailView.innerHTML = `
-                <a href="#" class="back-button" onclick="showGallery(); return false;">&larr; Back to Gallery</a>
-                <img src="${imageSrc}" alt="${artwork.name}" class="detail-image">
+                <a href="#" class="back-button" onclick="showGallery(); return false;">&larr; Zurück zur Galerie</a>
+                <img src="${imageSrc}" alt="${artwork.name}" class="detail-image" onclick="openFullscreenView('${imageSrc}')">
                 <h2>${artwork.name}</h2>
                 <div class="detail-info">
                     <strong>Year:</strong> <span>${artwork.year}</span>
@@ -317,7 +357,7 @@
                     <strong>Description:</strong> <span>${artwork.description}</span>
                 </div>
                 <div style="margin-top: 1rem; font-weight: 600;">${artwork.price}</div>
-                <div style="margin-top: 0.5rem;"><a href="mailto:serhat02@live.de">Contact serhat02@live.de</a></div>
+                <div style="margin-top: 0.5rem;"><a href="mailto:serhat02@live.de">serhat02@live.de kontaktieren</a></div>
             `;
 
             gallery.style.display = 'none';
@@ -331,6 +371,20 @@
             const detailView = document.getElementById('artwork-detail');
             gallery.style.display = 'grid';
             detailView.style.display = 'none';
+        }
+
+        // Function to open the fullscreen view
+        function openFullscreenView(imageSrc) {
+            const overlay = document.getElementById('fullscreen-overlay');
+            const image = document.getElementById('fullscreen-image');
+            image.src = imageSrc;
+            overlay.style.display = 'flex';
+        }
+
+        // Function to close the fullscreen view
+        function closeFullscreenView() {
+            const overlay = document.getElementById('fullscreen-overlay');
+            overlay.style.display = 'none';
         }
 
         // Call the function to create the gallery when the page loads
