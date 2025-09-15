@@ -7,11 +7,9 @@
     <title>serhat yuecel studio</title>
 
     <!--
-        The Inter font is loaded directly from Google Fonts.
+        The Inter font is no longer needed since we are using Century Gothic.
+        A link to Century Gothic is not required as it's a web-safe font.
     -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@700&display=swap" rel="stylesheet">
 
     <!-- All CSS styling is included here for a self-contained document -->
     <style>
@@ -23,8 +21,8 @@
         }
 
         body {
-            /* Kept the same font as the rest of the body for a unified look */
-            font-family: 'Roboto Slab', serif;
+            /* Changed the font family to Century Gothic with fallbacks */
+            font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
             background-color: var(--background-color);
             color: var(--primary-color);
             margin: 0;
@@ -50,8 +48,8 @@
         }
         
         .logo-text {
-            /* Updated font family, size, and weight for the logo */
-            font-family: 'Inter', sans-serif;
+            /* Updated font family to match the body for consistency */
+            font-family: 'Century Gothic', sans-serif;
             font-size: 2rem;
             font-weight: 700;
             letter-spacing: 1px;
