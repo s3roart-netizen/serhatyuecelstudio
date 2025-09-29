@@ -8,6 +8,8 @@
 
     <!-- All CSS styling is included here for a self-contained document -->
     <style>
+        /* Import der Chandler 42 Schriftart entfernt */
+
         :root {
             --primary-color: #333;
             --background-color: #ffffff;
@@ -16,13 +18,16 @@
         }
 
         body {
-            /* Changed the font family to Century Gothic with fallbacks */
+            /* The main font remains Century Gothic */
             font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
             background-color: var(--background-color);
             color: var(--primary-color);
             margin: 0;
             padding: 2rem 1rem;
             line-height: 1.6;
+            display: flex; /* Flexbox for the entire body */
+            flex-direction: column; /* Arrange elements vertically */
+            min-height: 100vh; /* Minimum height of the viewport */
         }
 
         header {
@@ -31,7 +36,7 @@
             justify-content: space-between;
             align-items: center;
             padding: 1rem 2rem;
-            border-bottom: 1px solid var(--light-grey);
+            /* Border removed as requested */
             margin-bottom: 2rem;
         }
         
@@ -52,7 +57,7 @@
 
         /* Styles for the Image logo */
         .logo-image {
-            height: 80px; /* AUF 80PX ERHÖHT */
+            height: 80px;
             width: auto;
             vertical-align: middle;
             transition: opacity 0.3s ease;
@@ -79,6 +84,7 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 1rem;
+            flex-grow: 1; /* Allows the main content to take up available space */
         }
 
         .gallery {
@@ -121,8 +127,10 @@
             display: block;
         }
 
+        /* Font reverted to Century Gothic */
         .artwork-title {
-            font-weight: 600;
+            font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
+            font-weight: 600; 
             font-size: 1.2rem;
             padding: 1rem 0;
             user-select: none;
@@ -153,12 +161,42 @@
             grid-template-columns: 1fr 2fr;
             gap: 1rem;
             font-weight: 300;
+            margin-bottom: 2rem;
         }
 
+        /* Font reverted to Century Gothic */
         .detail-info h2 {
+            font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
             font-size: 2rem;
             font-weight: 600;
             margin-top: 0;
+        }
+        
+        /* Styles for the new AI button and output */
+        .ai-section {
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--light-grey);
+            margin-top: 2rem;
+        }
+        
+        #generate-ai-description-button {
+            padding: 0.75rem 1.5rem;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.1s;
+        }
+        
+        #generate-ai-description-button:hover:not(:disabled) {
+            background-color: #000;
+            transform: translateY(-1px);
+        }
+        
+        #generate-ai-description-button:disabled {
+            background-color: #999;
+            cursor: not-allowed;
         }
 
         .back-button {
@@ -166,16 +204,17 @@
             margin-bottom: 1rem;
             padding: 0.5rem 1rem;
             background-color: transparent;
-            border: 1px solid #333;
+            border: none; 
             color: #333;
-            text-decoration: none;
+            text-decoration: none; 
             border-radius: 5px;
             width: fit-content;
-            transition: background-color 0.3s ease;
+            transition: color 0.3s ease;
         }
 
         .back-button:hover {
-            background-color: #f0f0f0;
+            background-color: transparent;
+            color: #000;
         }
 
         /* New styles for the fullscreen viewer */
@@ -209,6 +248,26 @@
             color: #fff;
             cursor: pointer;
             user-select: none;
+        }
+
+        /* STYLES FOR THE FOOTER */
+        footer {
+            margin-top: 3rem;
+            padding: 2rem 1rem 1rem;
+            border-top: 1px solid var(--light-grey);
+            text-align: center; /* Center the content */
+        }
+
+        .tiktok-link-image {
+            width: 150px; /* Smaller size for the TikTok image */
+            height: auto;
+            object-fit: contain;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        .tiktok-link-image:hover {
+            opacity: 0.9;
+            transform: scale(1.05);
         }
         
         /* Responsive adjustments */
@@ -244,9 +303,9 @@
             </a>
         </h1>
 
-        <!-- New section for social links -->
+        <!-- TikTok text link was removed. -->
         <div class="header-right">
-            <a href="https://www.tiktok.com/@serhatyuecel?is_from_webapp=1&sender_device=pc" class="social-link" target="_blank" rel="noopener noreferrer">TikTok</a>
+            <!-- Left empty -->
         </div>
     </header>
 
@@ -262,6 +321,14 @@
         </div>
     </main>
 
+    <!-- FOOTER FOR TIKTOK LINK -->
+    <footer>
+        <a href="https://www.tiktok.com/@serhatyuecel?is_from_webapp=1&sender_device=pc" target="_blank" rel="noopener noreferrer">
+            <!-- Using the Imgur image as a link -->
+            <img src="https://imgur.com/L0PbF4R.jpg" alt="Go to TikTok Profile" class="tiktok-link-image" onerror="this.onerror=null;this.src='https://placehold.co/150x50/e0e0e0/333333?text=TikTok'">
+        </a>
+    </footer>
+
     <!-- Fullscreen Image Viewer -->
     <div id="fullscreen-overlay" class="fullscreen-overlay">
         <span class="close-button" onclick="closeFullscreenView()">&times;</span>
@@ -276,15 +343,15 @@
                 year: "2025",
                 medium: "Mixed Media on canvas Paper",
                 size: "105cm x 198cm",
-                description: "Eine farbige und skurrile Gegenüberstellung zweier Kontroversen Figuren.",
+                description: "A colorful and whimsical juxtaposition of two controversial figures.",
                 price: "PRICE ON REQUEST"
             },
             "wonderful-again": {
                 name: "Make America Wonderful Again",
                 year: "2025",
                 medium: "Mixed Media on Paper",
-                size: "35,5~cm x 27,7~cm",
-                description: "Eine zeichnerische Darstellung dessen, was Amerika von sich selbst denkt.",
+                size: "35.5cm x 27.7cm",
+                description: "A drawn representation of what America thinks of itself.",
                 price: "PRICE ON REQUEST"
             },
             "damaged": {
@@ -292,7 +359,7 @@
                 year: "2025",
                 medium: "Mixed Media on Cotton Board",
                 size: "50cm x 50cm",
-                description: "Eine abstrakte Umsetzung von Trump und seinem „beschädigtem,, Verstand.",
+                description: "An abstract implementation of Trump and his 'damaged' mind.",
                 price: "PRICE ON REQUEST"
             },
             "batman-kills": {
@@ -300,7 +367,7 @@
                 year: "2025",
                 medium: "Mixed Media on Cotton Board",
                 size: "50cm x 50cm",
-                description: "Abbildung eines Emiratischen Geldscheines mit einer Kontroversen Meinung über den Dunklen Ritter.",
+                description: "Depiction of an Emirati banknote with a controversial opinion about the Dark Knight.",
                 price: "PRICE ON REQUEST"
             },
             "itaped": {
@@ -308,7 +375,7 @@
                 year: "2025",
                 medium: "Colored Pencils on Cotton Board",
                 size: "50cm x 50cm",
-                description: "Eine experimentelle Umetzung des bekannten „Comedian,,, inspieriert von dessen Banalität und begründet beim nutzen des innovativen und längst vergessenen $,i,$ von Apple.",
+                description: "An experimental implementation of the well-known 'Comedian,' inspired by its banality and based on the use of Apple's innovative and long-forgotten $,i,$.",
                 price: "PRICE ON REQUEST"
             },
             "kal-el-no": {
@@ -316,16 +383,26 @@
                 year: "2025",
                 medium: "Mixed Media on canvas Paper",
                 size: "20cm x 20cm",
-                description: "Gal hate",
+                // UPDATED DESCRIPTION
+                description: "Gal Gadots Famous and terrible line in Zack Snyders Justice League painted with political flair",
                 price: "PRICE ON REQUEST"
             },
-            // Neues Kunstwerk hinzugefügt
             "free-will-and-capitalism": {
                 name: "FREE WILL AND CAPITALISM",
                 year: "2025",
                 medium: "Mixed Media on Paper",
                 size: "50cm x 50cm",
-                description: "Ein Werk, das sich mit der Dynamik von freiem Willen und den Kräften des Kapitalismus auseinandersetzt.",
+                // UPDATED DESCRIPTION
+                description: "Walmart and its sudden state of being a playground for Viral Social Media Content",
+                price: "PRICE ON REQUEST"
+            },
+            "air-before-2016": {
+                name: "AIR BEFORE 2016",
+                year: "2025",
+                medium: "Mixed Media on Canvas",
+                size: "N/A",
+                // UPDATED DESCRIPTION
+                description: "Unique Air of a Time without Division, Minimalism and Mediocrity",
                 price: "PRICE ON REQUEST"
             }
         };
@@ -347,16 +424,105 @@
             "batman-kills": "https://i.imgur.com/BXoqmYY.png",
             "itaped": "https://i.imgur.com/FCEgD0y.jpeg",
             "kal-el-no": "https://i.imgur.com/xMnAQsl.jpeg",
-            // Das neue Kunstwerk verwendet jetzt ein Bild für die Galerie- und ein anderes für die Detailansicht
             "free-will-and-capitalism": {
-                gallery: "https://imgur.com/U6Ev36c.jpg", // Dieses Bild bleibt für die Galerie
-                detail: "https://imgur.com/lu25Guo.jpg"  // Dieses neue Bild wird beim Klicken angezeigt
+                gallery: "https://imgur.com/U6Ev36c.jpg",
+                detail: "https://imgur.com/lu25Guo.jpg"
+            },
+            "air-before-2016": {
+                gallery: "https://imgur.com/zGGu26Q", 
+                detail: "https://imgur.com/zGGu26Q"
             }
         };
         
+        // --- GEMINI API INTEGRATION ---
+        
+        const apiKey = ""; 
+        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+
+        // Utility function for API call with exponential backoff
+        async function callGemini(systemPrompt, userQuery, maxRetries = 3) {
+            const payload = {
+                contents: [{ parts: [{ text: userQuery }] }],
+                systemInstruction: { parts: [{ text: systemPrompt }] },
+            };
+
+            for (let i = 0; i < maxRetries; i++) {
+                try {
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+
+                    if (response.ok) {
+                        const result = await response.json();
+                        return result.candidates?.[0]?.content?.parts?.[0]?.text || "Error: API response did not contain text.";
+                    } else if (response.status === 429 && i < maxRetries - 1) {
+                        // Exponential backoff
+                        const delay = Math.pow(2, i) * 1000;
+                        await new Promise(resolve => setTimeout(resolve, delay));
+                        continue; // Retry
+                    } else {
+                        // Handle other non-successful responses
+                        const errorBody = await response.json();
+                        throw new Error(`Status ${response.status}. Message: ${errorBody.error?.message || 'Unknown'}`);
+                    }
+                } catch (error) {
+                    if (i === maxRetries - 1) {
+                        throw new Error(`Could not reach the Gemini API after ${maxRetries} attempts: ${error.message}`);
+                    }
+                    // Wait and retry
+                    const delay = Math.pow(2, i) * 1000;
+                    await new Promise(resolve => setTimeout(resolve, delay));
+                }
+            }
+        }
+
+        // Function to call Gemini and generate a new artistic description
+        async function generateDescription(artworkId) {
+            const artwork = artworks[artworkId];
+            const outputDiv = document.getElementById('ai-description-output');
+            const button = document.getElementById('generate-ai-description-button');
+
+            if (!artwork) {
+                outputDiv.textContent = "Error: Artwork not found.";
+                return;
+            }
+
+            button.disabled = true;
+            outputDiv.innerHTML = '<span style="color: #666;">Generating new interpretation...</span>';
+            
+            // System instruction for the art critic persona (Now in English)
+            const systemPrompt = "You are a renowned art critic and curator. Your task is to write a new, profound, and inspiring interpretation of an artwork based on the provided data. The response must be a single, flowing paragraph in English and should not exceed 100 words in length. Use eloquent and poetic language.";
+            
+            // User query with artwork details (Now in English)
+            const userQuery = `Generate a detailed, artistic description for the following artwork:
+            - Name: ${artwork.name}
+            - Medium: ${artwork.medium}
+            - Year: ${artwork.year}
+            - Current Description (for context): ${artwork.description}`;
+
+            try {
+                const generatedText = await callGemini(systemPrompt, userQuery);
+                outputDiv.innerHTML = `
+                    <div style="font-style: italic; border-left: 3px solid #333; padding-left: 15px; margin-top: 15px; background-color: #f5f5f5; padding: 15px; border-radius: 5px; line-height: 1.8;">
+                        <strong>AI Interpretation:</strong><br>${generatedText}
+                    </div>
+                `;
+            } catch (error) {
+                outputDiv.innerHTML = `<div style="color: red; margin-top: 10px;">Error loading AI interpretation: ${error.message}</div>`;
+            } finally {
+                button.disabled = false;
+            }
+        }
+        
+        // --- END GEMINI API INTEGRATION ---
+
         // Function to create the HTML for the gallery items
         function createGalleryItems() {
             const galleryList = document.getElementById('main-gallery');
+            // Clears the gallery before re-rendering
+            galleryList.innerHTML = ''; 
             for (const key in artworks) {
                 const artwork = artworks[key];
                 const listItem = document.createElement('li');
@@ -395,16 +561,35 @@
                              : (imageSources[id] || 'https://placehold.co/500x500/A0A0A0/ffffff?text=Image+Not+Found');
 
             detailView.innerHTML = `
-                <a href="#" class="back-button" onclick="showGallery(); return false;">&larr; Zurück zur Galerie</a>
+                <a href="#" class="back-button" onclick="showGallery(); return false;">Back to Gallery</a>
                 <img src="${imageSrc}" alt="${artwork.name}" class="detail-image" onclick="openFullscreenView('${imageSrc}')">
-                <h2>${artwork.name}</h2>
+                
                 <div class="detail-info">
-                    <strong>Year:</strong> <span>${artwork.year}</span>
-                    <strong>Medium:</strong> <span>${artwork.medium}</span>
-                    <strong>Size:</strong> <span>${artwork.size}</span>
-                    <strong>Description:</strong> <span>${artwork.description}</span>
+                    <div>
+                        <h2>${artwork.name}</h2>
+                        <div style="margin-top: -1rem; margin-bottom: 2rem; font-weight: 600;">${artwork.price}</div>
+                        
+                        <!-- Details in the left column -->
+                        <strong>Year:</strong> <span>${artwork.year}</span><br>
+                        <strong>Medium:</strong> <span>${artwork.medium}</span><br>
+                        <strong>Size:</strong> <span>${artwork.size}</span>
+                        
+                    </div>
+                    <div>
+                        <!-- Description in the right column -->
+                        <strong>Description:</strong> <span>${artwork.description}</span>
+                    </div>
                 </div>
-                <div style="margin-top: 1rem; font-weight: 600;">${artwork.price}</div>
+
+                <!-- AI SECTION -->
+                <div class="ai-section">
+                    <button id="generate-ai-description-button" onclick="generateDescription('${id}')">
+                        Generate AI Interpretation
+                    </button>
+                    <div id="ai-description-output">
+                        <!-- AI text will be injected here -->
+                    </div>
+                </div>
             `;
 
             gallery.style.display = 'none';
