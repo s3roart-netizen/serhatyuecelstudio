@@ -177,6 +177,11 @@
             font-size: 2rem;
             font-weight: 600;
             margin-top: 0;
+            
+            /* NEU: Titel auf eine Zeile beschränken */
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
         
         /* Styles for the new AI button and output */
@@ -469,25 +474,31 @@
                              ? imageSources[id].detail 
                              : (imageSources[id] || 'https://placehold.co/500x500/A0A0A0/ffffff?text=Image+Not+Found');
 
-            // HIER WIRD DER INHALT DER DETAIL-ANSICHT GENERIERT (AI-SECTION WURDE ENTFERNT)
+            // NEU: HIER WIRD DER INHALT DER DETAIL-ANSICHT NEU STRUKTURIERT
             detailView.innerHTML = `
                 <a href="#" class="back-button" onclick="showGallery(); return false;">Back to Gallery</a>
                 <img src="${imageSrc}" alt="${artwork.name}" class="detail-image" onclick="openFullscreenView('${imageSrc}')">
                 
                 <div class="detail-info">
                     <div>
+                        <!-- 1. Title -->
                         <h2>${artwork.name}</h2>
-                        <div style="margin-top: -1rem; margin-bottom: 2rem; font-weight: 600;">${artwork.price}</div>
                         
-                        <!-- Details in der linken Spalte -->
+                        <!-- 2. Description (Now between Title and details) -->
+                        <div style="margin-bottom: 2rem; font-weight: 300; font-style: italic; line-height: 1.5;">${artwork.description}</div>
+                        
+                        <!-- 3. Details -->
                         <strong>Year:</strong> <span>${artwork.year}</span><br>
                         <strong>Medium:</strong> <span>${artwork.medium}</span><br>
                         <strong>Size:</strong> <span>${artwork.size}</span>
                         
+                        <!-- 4. Price (Now under Size) -->
+                        <div style="margin-top: 1rem; font-weight: 600; color: var(--primary-color);">${artwork.price}</div>
+                        
                     </div>
+                    <!-- Right column is now empty as all primary info is in the first column -->
                     <div>
-                        <!-- Beschreibung in der rechten Spalte -->
-                        <strong>Description:</strong> <span>${artwork.description}</span>
+                        
                     </div>
                 </div>
             `;
