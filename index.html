@@ -134,7 +134,9 @@
         }
 
         /* Font reverted to Century Gothic */
+        /* Title in the gallery view is now hidden, but the class remains for structure */
         .artwork-title {
+            display: none; /* NEU: Versteckt den Titel in der Galerieansicht */
             font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
             font-weight: 600; 
             font-size: 1.2rem;
@@ -425,10 +427,10 @@
                 gallery: "https://imgur.com/U6Ev36c.jpg",
                 detail: "https://imgur.com/lu25Guo.jpg"
             },
-            // UPDATED IMAGE SOURCE HERE
+            // AKTUALISIERTER BILDQUELLE FÜR "AIR BEFORE 2016" (Verifizierte direkte Imgur-URL)
             "air-before-2016": {
-                gallery: "https://i.imgur.com/YR7VBNN.jpeg", 
-                detail: "https://i.imgur.com/YR7VBNN.jpeg"
+                gallery: "https://i.imgur.com/NWn4VAc.jpeg", 
+                detail: "https://i.imgur.com/NWn4VAc.jpeg"
             }
         };
         
@@ -448,9 +450,10 @@
                                  ? imageSources[key].gallery 
                                  : (imageSources[key] || 'https://placehold.co/500x500/A0A0A0/ffffff?text=Image+Not+Found');
 
+                // *** NEU: Entfernen des Titels aus der Hauptgalerie-Ansicht (via CSS display: none) ***
                 listItem.innerHTML = `
-                    <img src="${imageSrc}" alt="${artwork.name}" class="artwork-image">
-                    <div class="artwork-title">${artwork.name}</div>
+                    <img src="${imageSrc}" alt="${artwork.name}" class="artwork-image" onerror="this.onerror=null;this.src='https://placehold.co/500x500/A0A0A0/ffffff?text=Image+Not+Found'">
+                    <div class="artwork-title"></div> 
                 `;
                 
                 listItem.addEventListener('click', () => showArtworkDetail(key));
@@ -474,14 +477,14 @@
                              ? imageSources[id].detail 
                              : (imageSources[id] || 'https://placehold.co/500x500/A0A0A0/ffffff?text=Image+Not+Found');
 
-            // NEU: HIER WIRD DER INHALT DER DETAIL-ANSICHT NEU STRUKTURIERT
+            // HIER WIRD DER INHALT DER DETAIL-ANSICHT NEU STRUKTURIERT (Titel bleibt hier erhalten!)
             detailView.innerHTML = `
                 <a href="#" class="back-button" onclick="showGallery(); return false;">Back to Gallery</a>
-                <img src="${imageSrc}" alt="${artwork.name}" class="detail-image" onclick="openFullscreenView('${imageSrc}')">
+                <img src="${imageSrc}" alt="${artwork.name}" class="detail-image" onclick="openFullscreenView('${imageSrc}')" onerror="this.onerror=null;this.src='https://placehold.co/800x600/A0A0A0/ffffff?text=Image+Not+Found'">
                 
                 <div class="detail-info">
                     <div>
-                        <!-- 1. Title -->
+                        <!-- 1. Title (One line enforced by CSS, remains visible here) -->
                         <h2>${artwork.name}</h2>
                         
                         <!-- 2. Description (Now between Title and details) -->
