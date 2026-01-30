@@ -20,6 +20,30 @@
     <!-- All CSS styling is included here for a self-contained document -->
     <style>
         /* Import der Chandler 42 Schriftart entfernt */
+        /* Embed Apple Garamond font files */
+        @font-face {
+            font-family: 'Apple Garamond';
+            src: url('SYS/fonts/AppleGaramond.ttf') format('truetype');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'Apple Garamond';
+            src: url('SYS/fonts/AppleGaramond.ttf') format('truetype');
+            font-weight: 400;
+            font-style: italic;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'Apple Garamond';
+            src: url('SYS/fonts/AppleGaramond.ttf') format('truetype');
+            font-weight: 700;
+            font-style: normal;
+            font-display: swap;
+        }
 
         :root {
             --primary-color: #333;
@@ -29,8 +53,8 @@
         }
 
         body {
-            /* The main font remains Century Gothic */
-            font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
+            /* The main font is Apple SF */
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', 'Helvetica Neue', Helvetica, Arial, sans-serif;
             background-color: var(--background-color);
             color: var(--primary-color);
             margin: 0;
@@ -77,7 +101,7 @@
 
         /* Adjust hover effect for the logo (e.g., subtle darkening) */
         header .logo-link:hover .logo-image {
-            opacity: 0.8; 
+            opacity: 0.8;
         }
 
         .social-link {
@@ -120,7 +144,7 @@
             cursor: pointer;
 
             /* Center the content horizontally in the item */
-            display: flex; 
+            display: flex;
             flex-direction: column;
             align-items: center;
 
@@ -154,12 +178,12 @@
             display: block;
         }
 
-        /* Font reverted to Century Gothic */
+        /* Using Apple SF */
         /* Title in the gallery view is now hidden, but the class remains for structure */
         .artwork-title {
             display: none; /* NEU: Versteckt den Titel in der Galerieansicht */
-            font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
-            font-weight: 600; 
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', 'Helvetica Neue', Helvetica, Arial;
+            font-weight: 600;
             font-size: 1.2rem;
             padding: 1rem 0;
             user-select: none;
@@ -169,35 +193,40 @@
         /* Styles for the artwork detail page */
         .artwork-detail {
             display: none;
-            padding: 2rem;
+            padding: 1rem; /* reduced from 2rem */
             background-color: transparent;
             border-radius: 0;
-            max-width: 800px;
-            margin: 2rem auto;
+            max-width: 640px; /* reduced from 800px */
+            margin: 1rem auto; /* reduced vertical margin */
             box-shadow: none;
         }
 
         .detail-image {
             width: 100%;
-            max-height: none;
-            object-fit: contain;
-            margin-bottom: 2rem;
             height: auto;
-            cursor: pointer; /* Add cursor to indicate it's clickable */
+            max-width: 560px; /* new: limit image width inside container */
+            max-height: 60vh; /* new: reduce vertical size */
+            object-fit: contain;
+            margin: 0 auto 1rem; /* center image and reduce bottom margin */
+            display: block;
+            cursor: pointer;
         }
+
+        /* Removed .detail-media and related styles as requested */
 
         .detail-info {
             display: grid;
-            grid-template-columns: 1fr 2fr;
-            gap: 1rem;
+            grid-template-columns: 1fr; /* single column for a tighter layout */
+            gap: 0.5rem; /* reduced from 1rem */
             font-weight: 300;
-            margin-bottom: 2rem;
+            margin-bottom: 1rem; /* reduced from 2rem */
+            font-size: 0.95rem; /* slightly smaller text */
         }
 
-        /* Font reverted to Century Gothic */
+        /* Using Apple SF */
         .detail-info h2 {
-            font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
-            font-size: 2rem;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-size: 1.5rem; /* reduced from 2rem */
             font-weight: 600;
             margin-top: 0;
             
@@ -206,15 +235,27 @@
             overflow: hidden;
             text-overflow: ellipsis;
         }
+
+        /* Labels in detail (e.g., Year:, Medium:, Size:) use SF */
+        .detail-info strong {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', 'Helvetica Neue', Helvetica, Arial;
+            font-weight: 600;
+        }
+
+        /* Values and price use Apple SF */
+        .detail-info span,
+        .price-line {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        }
         
         .back-button {
             display: block;
-            margin-bottom: 1rem;
+            margin-bottom: 0.5rem;
             padding: 0.5rem 1rem;
             background-color: transparent;
-            border: none; 
+            border: none;
             color: #333;
-            text-decoration: none; 
+            text-decoration: none;
             border-radius: 5px;
             width: fit-content;
             transition: color 0.3s ease;
@@ -302,6 +343,10 @@
                 grid-template-columns: repeat(4, 1fr);
             }
         }
+
+        .logo-text {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', 'Helvetica Neue', Helvetica, Arial;
+        }
     </style>
 </head>
 <body>
@@ -358,7 +403,7 @@
                 year: "2025",
                 medium: "Mixed Media on canvas Paper",
                 size: "105cm x 198cm",
-                description: "A colorful and whimsical juxtaposition of two controversial figures.",
+                description: "A colorful and explosive portrayal of two controversial figures.",
                 price: "PRICE ON REQUEST"
             },
             "wonderful-again": {
@@ -366,7 +411,7 @@
                 year: "2025",
                 medium: "Mixed Media on Paper",
                 size: "35.5cm x 27.7cm",
-                description: "A drawn representation of what America thinks of itself.",
+                description: "What America thinks of itself.",
                 price: "PRICE ON REQUEST"
             },
             "damaged": {
@@ -374,14 +419,14 @@
                 year: "2025",
                 medium: "Mixed Media on Cotton Board",
                 size: "50cm x 50cm",
-                description: "An abstract implementation of Trump and his 'damaged' mind.",
+                description: "An abstract display of Trump and his 'damaged' mind.",
                 price: "PRICE ON REQUEST"
             },
             "batman-kills": {
                 name: "BATMAN KILLS",
                 year: "2025",
                 medium: "Mixed Media on Cotton Board",
-                size: "50cm x 50cm",
+                size: "147mm x 66mm",
                 description: "Depiction of an Emirati banknote with a controversial opinion about the Dark Knight.",
                 price: "PRICE ON REQUEST"
             },
@@ -389,17 +434,16 @@
                 name: "iTaped",
                 year: "2025",
                 medium: "Colored Pencils on Cotton Board",
-                size: "50cm x 50cm",
-                description: "An experimental implementation of the well-known 'Comedian,' inspired by its banality and based on the use of Apple's innovative and long-forgotten $,i,$.",
+                size: "Real iPhone3GS",
+                description: "An experimental, alternate version of the well-known 'Comedian,' inspired by its banality and based on the use of Apple's innovative and long-forgotten \"i\".",
                 price: "PRICE ON REQUEST"
             },
             "kal-el-no": {
                 name: "KAL EL NO",
                 year: "2025",
                 medium: "Mixed Media on canvas Paper",
-                size: "20cm x 20cm",
-                // UPDATED DESCRIPTION
                 description: "Gal Gadots Famous and terrible line in Zack Snyders Justice League painted with political flair",
+                size: "20cm x 20cm",
                 price: "PRICE ON REQUEST"
             },
             "free-will-and-capitalism": {
@@ -407,7 +451,6 @@
                 year: "2025",
                 medium: "Mixed Media on Paper",
                 size: "50cm x 50cm",
-                // UPDATED DESCRIPTION
                 description: "Walmart and its sudden state of being a playground for Viral Social Media Content",
                 price: "PRICE ON REQUEST"
             },
@@ -445,7 +488,7 @@
             },
             // AKTUALISIERTER BILDQUELLE FÜR "AIR BEFORE 2016" (Verifizierte direkte Imgur-URL)
             "air-before-2016": {
-                gallery: "https://i.imgur.com/NWn4VAc.jpeg", 
+                gallery: "https://i.imgur.com/NWn4VAc.jpeg",
                 detail: "https://i.imgur.com/NWn4VAc.jpeg"
             }
         };
@@ -454,7 +497,7 @@
         function createGalleryItems() {
             const galleryList = document.getElementById('main-gallery');
             // Clears the gallery before re-rendering
-            galleryList.innerHTML = ''; 
+            galleryList.innerHTML = '';
             for (const key in artworks) {
                 const artwork = artworks[key];
                 const listItem = document.createElement('li');
@@ -462,8 +505,8 @@
                 listItem.setAttribute('data-artwork-id', key);
 
                 // Check if the image source is an object with a 'gallery' property
-                const imageSrc = (typeof imageSources[key] === 'object' && imageSources[key].gallery) 
-                                 ? imageSources[key].gallery 
+                const imageSrc = (typeof imageSources[key] === 'object' && imageSources[key].gallery)
+                                 ? imageSources[key].gallery
                                  : (imageSources[key] || 'https://placehold.co/500x500/A0A0A0/ffffff?text=Image+Not+Found');
 
                 // *** NEU: Entfernen des Titels aus der Hauptgalerie-Ansicht (via CSS display: none) ***
@@ -479,6 +522,9 @@
 
         // Function to show the artwork details
         function showArtworkDetail(id) {
+            // Push a history state so the browser Back button returns to the gallery
+            history.pushState({ view: 'detail', id }, '', `#artwork-${id}`);
+
             const gallery = document.getElementById('main-gallery');
             const detailView = document.getElementById('artwork-detail');
             const artwork = artworks[id];
@@ -489,13 +535,13 @@
             }
 
             // Check if the image source is an object with a 'detail' property
-            const imageSrc = (typeof imageSources[id] === 'object' && imageSources[id].detail) 
-                             ? imageSources[id].detail 
+            const imageSrc = (typeof imageSources[id] === 'object' && imageSources[id].detail)
+                             ? imageSources[id].detail
                              : (imageSources[id] || 'https://placehold.co/500x500/A0A0A0/ffffff?text=Image+Not+Found');
 
             // HIER WIRD DER INHALT DER DETAIL-ANSICHT NEU STRUKTURIERT (Titel bleibt hier erhalten!)
             detailView.innerHTML = `
-                <a href="#" class="back-button" onclick="showGallery(); return false;">Back to Gallery</a>
+                <a href="#" class="back-button" onclick="history.back(); return false;">Back to Gallery</a>
                 <img src="${imageSrc}" alt="${artwork.name}" class="detail-image" onclick="openFullscreenView('${imageSrc}')" onerror="this.onerror=null;this.src='https://placehold.co/800x600/A0A0A0/ffffff?text=Image+Not+Found'">
                 
                 <div class="detail-info">
@@ -504,7 +550,7 @@
                         <h2>${artwork.name}</h2>
                         
                         <!-- 2. Description (Now between Title and details) -->
-                        <div style="margin-bottom: 2rem; font-weight: 300; font-style: italic; line-height: 1.5;">${artwork.description}</div>
+                        <div style="margin-bottom: 1rem; font-weight: 300; font-style: italic; line-height: 1.5;">${artwork.description || ''}</div>
                         
                         <!-- 3. Details -->
                         <strong>Year:</strong> <span>${artwork.year}</span><br>
@@ -512,7 +558,7 @@
                         <strong>Size:</strong> <span>${artwork.size}</span>
                         
                         <!-- 4. Price (Now under Size) -->
-                        <div style="margin-top: 1rem; font-weight: 600; color: var(--primary-color);">${artwork.price}</div>
+                        <div class="price-line" style="margin-top: 0.5rem; font-weight: 600; color: var(--primary-color);">${artwork.price}</div>
                         
                     </div>
                     <!-- Right column is now empty as all primary info is in the first column -->
@@ -529,6 +575,11 @@
 
         // Function to go back to the gallery
         function showGallery() {
+            // Ensure we have a base gallery state so Back does not leave the site
+            if (!history.state || history.state.view !== 'gallery') {
+                history.pushState({ view: 'gallery' }, '', location.pathname);
+            }
+
             const gallery = document.getElementById('main-gallery');
             const detailView = document.getElementById('artwork-detail');
             gallery.style.display = 'grid';
@@ -549,8 +600,43 @@
             overlay.style.display = 'none';
         }
 
-        // Call the function to create the gallery when the page loads
-        document.addEventListener('DOMContentLoaded', createGalleryItems);
+        // Handle browser navigation (Back/Forward)
+        window.addEventListener('popstate', (event) => {
+            const state = event.state;
+            if (!state || state.view === 'gallery') {
+                // Show gallery when no state or gallery state
+                const gallery = document.getElementById('main-gallery');
+                const detailView = document.getElementById('artwork-detail');
+                gallery.style.display = 'grid';
+                detailView.style.display = 'none';
+                return;
+            }
+
+            if (state.view === 'detail' && state.id) {
+                // Reopen the detail for the given artwork id
+                showArtworkDetail(state.id);
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            createGalleryItems();
+
+            // Set an initial gallery state if none exists
+            if (!history.state) {
+                history.replaceState({ view: 'gallery' }, '', location.pathname);
+            }
+
+            // Support deep linking via hash like #artwork-<id>
+            if (location.hash && location.hash.startsWith('#artwork-')) {
+                const id = location.hash.replace('#artwork-', '');
+                if (artworks[id]) {
+                    showArtworkDetail(id);
+                }
+            } else {
+                // Ensure gallery is visible on first load
+                showGallery();
+            }
+        });
     </script>
 </body>
 </html>
