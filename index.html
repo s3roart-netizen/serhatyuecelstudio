@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
 
-<!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-MKJ38MNNCE"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -12,15 +11,12 @@
   gtag('config', 'G-MKJ38MNNCE');
 </script>
     
-    <!-- Basic meta tags for responsiveness and character set -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>serhat yuecel studio</title>
 
-    <!-- All CSS styling is included here for a self-contained document -->
     <style>
-        /* Import der Chandler 42 Schriftart entfernt */
-        /* Embed Apple Garamond font files */
+       
         @font-face {
             font-family: 'Apple Garamond';
             src: url('SYS/fonts/AppleGaramond.ttf') format('truetype');
@@ -58,7 +54,7 @@
             background-color: var(--background-color);
             color: var(--primary-color);
             margin: 0;
-            padding: 2rem 1rem;
+            padding: 0rem 1rem;
             line-height: 1.6;
             display: flex; /* Flexbox for the entire body */
             flex-direction: column; /* Arrange elements vertically */
@@ -70,9 +66,9 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1rem 2rem;
+            padding: 0rem 1rem; /* Changed from 0rem 2rem to reduce vertical space */
             /* Border removed as requested */
-            margin-bottom: 2rem;
+            margin-bottom: 0;
         }
         
         /* This empty div helps to center the logo text using flexbox */
@@ -97,6 +93,8 @@
             vertical-align: middle;
             transition: opacity 0.3s ease;
             object-fit: contain; /* Ensures the image fits without cropping */
+            display: block;
+            margin-top: 12px;
         }
 
         /* Adjust hover effect for the logo (e.g., subtle darkening) */
@@ -117,8 +115,8 @@
         /* Styles for the main gallery view */
         .gallery-container {
             max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 1rem;
+            margin: 3rem auto 0;
+            padding: 0 1rem 0rem;
             flex-grow: 1; /* Allows the main content to take up available space */
         }
 
@@ -126,7 +124,7 @@
             display: grid;
             /* HIER ANPASSUNG FÜR 4 SPALTEN (1FR = gleicher Anteil) */
             grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
+            gap: 1rem;
             list-style: none;
             padding: 0;
             margin: 0;
@@ -148,8 +146,7 @@
             flex-direction: column;
             align-items: center;
 
-            /* ✅ NUR DIESE LANDINGPAGE-ÄNDERUNG:
-               Gleiche Kachelgröße für alle Bilder, ohne Cropping und ohne Randkontakt */
+        
             aspect-ratio: 1 / 1;
             box-sizing: border-box;
             padding: 12px;
@@ -193,11 +190,11 @@
         /* Styles for the artwork detail page */
         .artwork-detail {
             display: none;
-            padding: 1rem; /* reduced from 2rem */
+            padding: 0; /* changed from 1rem */
             background-color: transparent;
             border-radius: 0;
             max-width: 640px; /* reduced from 800px */
-            margin: 1rem auto; /* reduced vertical margin */
+            margin: 0 auto; /* changed from 1rem auto */
             box-shadow: none;
         }
 
@@ -207,9 +204,18 @@
             max-width: 560px; /* new: limit image width inside container */
             max-height: 60vh; /* new: reduce vertical size */
             object-fit: contain;
-            margin: 0 auto 1rem; /* center image and reduce bottom margin */
+            margin: 0 auto 0; /* changed from 0 auto 0.25rem to reduce spacing below image */
             display: block;
             cursor: pointer;
+        }
+
+        .detail-image.large-detail {
+            max-width: 1000px;
+            max-height: 85vh;
+          }
+          
+        .detail-image.itaped-adjust {
+            margin-top: -40px; /* moves image up; adjust value if needed */
         }
 
         /* Removed .detail-media and related styles as requested */
@@ -219,8 +225,9 @@
             grid-template-columns: 1fr; /* single column for a tighter layout */
             gap: 0.5rem; /* reduced from 1rem */
             font-weight: 300;
-            margin-bottom: 1rem; /* reduced from 2rem */
+            margin-bottom: 0.5rem; /* changed from 1rem */
             font-size: 0.95rem; /* slightly smaller text */
+            margin-top: 0.25rem; /* Added to ensure info block starts immediately under the image */
         }
 
         /* Using Apple SF */
@@ -248,24 +255,6 @@
             font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', 'Helvetica Neue', Helvetica, Arial, sans-serif;
         }
         
-        .back-button {
-            display: block;
-            margin-bottom: 0.5rem;
-            padding: 0.5rem 1rem;
-            background-color: transparent;
-            border: none;
-            color: #333;
-            text-decoration: none;
-            border-radius: 5px;
-            width: fit-content;
-            transition: color 0.3s ease;
-        }
-
-        .back-button:hover {
-            background-color: transparent;
-            color: #000;
-        }
-
         /* New styles for the fullscreen viewer */
         .fullscreen-overlay {
             display: none; /* Hidden by default */
@@ -303,7 +292,6 @@
         footer {
             margin-top: 3rem;
             padding: 2rem 1rem 1rem;
-            border-top: 1px solid var(--light-grey);
             text-align: center; /* Center the content */
         }
 
@@ -346,6 +334,10 @@
 
         .logo-text {
             font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', 'Helvetica Neue', Helvetica, Arial;
+        }
+
+        h1.logo-text {
+          margin: 0;
         }
     </style>
 </head>
@@ -431,12 +423,8 @@
                 price: "PRICE ON REQUEST"
             },
             "itaped": {
-                name: "iTaped",
-                year: "2025",
-                medium: "Colored Pencils on Cotton Board",
-                size: "Real iPhone3GS",
-                description: "An experimental, alternate version of the well-known 'Comedian,' inspired by its banality and based on the use of Apple's innovative and long-forgotten \"i\".",
-                price: "PRICE ON REQUEST"
+                gallery: "https://i.imgur.com/bNlXMcU.png",
+                detail: "https://i.imgur.com/bsQeOpO.jpeg"
             },
             "kal-el-no": {
                 name: "KAL EL NO",
@@ -480,7 +468,10 @@
                 detail: "https://i.imgur.com/kYtaN1d.jpeg"
             },
             "batman-kills": "https://i.imgur.com/BXoqmYY.png",
-            "itaped": "https://i.imgur.com/FCEgD0y.jpeg",
+            "itaped": {
+                gallery: "https://i.imgur.com/bNlXMcU.png",
+                detail: "https://i.imgur.com/bsQeOpO.jpeg"
+            },
             "kal-el-no": "https://i.imgur.com/xMnAQsl.jpeg",
             "free-will-and-capitalism": {
                 gallery: "https://imgur.com/U6Ev36c.jpg",
@@ -541,8 +532,7 @@
 
             // HIER WIRD DER INHALT DER DETAIL-ANSICHT NEU STRUKTURIERT (Titel bleibt hier erhalten!)
             detailView.innerHTML = `
-                <a href="#" class="back-button" onclick="history.back(); return false;">Back to Gallery</a>
-                <img src="${imageSrc}" alt="${artwork.name}" class="detail-image" onclick="openFullscreenView('${imageSrc}')" onerror="this.onerror=null;this.src='https://placehold.co/800x600/A0A0A0/ffffff?text=Image+Not+Found'">
+                <img src="${imageSrc}" alt="${artwork.name}" class="detail-image ${id === 'itaped' ? 'large-detail itaped-adjust' : ''}" onclick="openFullscreenView('${imageSrc}')" onerror="this.onerror=null;this.src='https://placehold.co/800x600/A0A0A0/ffffff?text=Image+Not+Found'">
                 
                 <div class="detail-info">
                     <div>
@@ -550,7 +540,7 @@
                         <h2>${artwork.name}</h2>
                         
                         <!-- 2. Description (Now between Title and details) -->
-                        <div style="margin-bottom: 1rem; font-weight: 300; font-style: italic; line-height: 1.5;">${artwork.description || ''}</div>
+                        <div style="margin-bottom: 0; font-weight: 300; font-style: italic; line-height: 1.5;">${artwork.description || ''}</div>
                         
                         <!-- 3. Details -->
                         <strong>Year:</strong> <span>${artwork.year}</span><br>
