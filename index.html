@@ -806,6 +806,56 @@
                 showGallery();
             }
         });
+
+        // ─── PHOTO LIGHTBOX ──────────────────────────────────────────
+        let lightboxPhotos = []; // flat array of {id, src} for current series
+        let lightboxIndex  = 0;
+
+        function openLightbox(photoId) {
+            // Build ordered list of all photos across all series
+            lightboxPhotos = [];
+            photoSeries.forEach(series => {
+                Object.keys(series.photos).forEach(key => {
+                    const src = series.sources[key];
+                    lightboxPhotos.push({ id: key, src: (src && src.detail) ? src.detail : src });
+                });
+            });
+
+            lightboxIndex = lightboxPhotos.findIndex(p => p.id === photoId);
+            if (lightboxIndex === -1) lightboxIndex = 0;
+            renderLightbox();
+            document.getElementById('photo-lightbox').classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function renderLightbox() {
+            const item = lightboxPhotos[lightboxIndex];
+            document.getElementById('lightbox-img').src = item.src;
+            document.getElementById('lightbox-counter').textContent =
+                (lightboxIndex + 1) + ' / ' + lightboxPhotos.length;
+        }
+
+        function lightboxNav(dir, event) {
+            if (event) event.stopPropagation();
+            lightboxIndex = (lightboxIndex + dir + lightboxPhotos.length) % lightboxPhotos.length;
+            renderLightbox();
+        }
+
+        function closeLightbox(event) {
+            if (event && event.target !== document.getElementById('photo-lightbox') &&
+                !event.target.classList.contains('lightbox-close')) return;
+            document.getElementById('photo-lightbox').classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        // Keyboard navigation for lightbox
+        document.addEventListener('keydown', (e) => {
+            const lb = document.getElementById('photo-lightbox');
+            if (!lb.classList.contains('open')) return;
+            if (e.key === 'ArrowRight') lightboxNav(1, null);
+            if (e.key === 'ArrowLeft')  lightboxNav(-1, null);
+            if (e.key === 'Escape')     { lb.classList.remove('open'); document.body.style.overflow = ''; }
+        });
     </script>
 
     <!-- Photo Lightbox -->
