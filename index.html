@@ -64,34 +64,53 @@
         /* ─── HEADER ─────────────────────────────────────────────── */
         header {
             display: flex;
-            justify-content: flex-start;
+            justify-content: center;
             align-items: center;
             padding: 0rem 1rem;
             margin-bottom: 0;
-            gap: 2rem;
-        }
-
-        /* Each nav section: logo + label side by side */
-        .nav-section {
-            display: flex;
-            align-items: flex-end;
             gap: 0;
-            text-decoration: none;
-            cursor: pointer;
-            transition: opacity 0.2s ease;
+            position: relative;
         }
 
-        .nav-section:hover {
-            opacity: 0.75;
+        .header-logo-wrap {
+            display: flex;
+            justify-content: center;
         }
 
-        .nav-logo {
+        .logo-image {
             height: 80px;
             width: auto;
             object-fit: contain;
             display: block;
-            margin-top: 12px;
-            transition: filter 0.25s ease, opacity 0.25s ease;
+            transition: opacity 0.3s ease;
+        }
+
+        .header-logo-wrap a:hover .logo-image {
+            opacity: 0.7;
+        }
+
+        .nav-links {
+            position: absolute;
+            left: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .header-tiktok {
+            position: absolute;
+            right: 1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-section {
+            text-decoration: none;
+            cursor: pointer;
+            transition: color 0.2s ease;
+            background: none;
+            border: none;
+            padding: 0;
         }
 
         .nav-label {
@@ -101,23 +120,14 @@
             letter-spacing: 0;
             white-space: nowrap;
             transition: color 0.25s ease;
-            margin-bottom: 10px;
-            margin-left: -18px;
         }
 
         /* Active state: black */
-        .nav-section.active .nav-logo {
-            filter: none;
-            opacity: 1;
-        }
         .nav-section.active .nav-label {
             color: var(--nav-active);
         }
 
         /* Inactive state: greyed out */
-        .nav-section.inactive .nav-logo {
-            filter: grayscale(100%) opacity(0.35);
-        }
         .nav-section.inactive .nav-label {
             color: var(--nav-inactive);
         }
@@ -410,22 +420,31 @@
 <body>
 
     <header>
-        <!-- Traditional Art nav section -->
-        <div class="nav-section active" id="nav-art" onclick="switchSection('art')">
-            <img src="https://imgur.com/zslzw0O.jpg" 
-                 alt="Serhat Yuecel Logo" 
-                 class="nav-logo"
-                 onerror="this.onerror=null;this.src='https://placehold.co/80x80/f0f0f0/333333?text=SY'">
-            <span class="nav-label">Traditional Art</span>
+        <!-- Centered logo -->
+        <div class="header-logo-wrap">
+            <a href="#" onclick="showGallery(); return false;">
+                <img src="https://imgur.com/zslzw0O.jpg"
+                     alt="Serhat Yuecel Logo"
+                     class="logo-image"
+                     onerror="this.onerror=null;this.src='https://placehold.co/80x80/f0f0f0/333333?text=SY'">
+            </a>
         </div>
 
-        <!-- Photography nav section -->
-        <div class="nav-section inactive" id="nav-photo" onclick="switchSection('photo')">
-            <img src="https://imgur.com/zslzw0O.jpg" 
-                 alt="Serhat Yuecel Logo" 
-                 class="nav-logo"
-                 onerror="this.onerror=null;this.src='https://placehold.co/80x80/f0f0f0/333333?text=SY'">
-            <span class="nav-label">Photography</span>
+        <!-- Nav links top left -->
+        <nav class="nav-links">
+            <div class="nav-section active" id="nav-art" onclick="switchSection('art')">
+                <span class="nav-label">Traditional Art</span>
+            </div>
+            <div class="nav-section inactive" id="nav-photo" onclick="switchSection('photo')">
+                <span class="nav-label">Photography</span>
+            </div>
+        </nav>
+
+        <!-- TikTok top right -->
+        <div class="header-tiktok">
+            <a href="https://www.tiktok.com/@serhatyuecel?is_from_webapp=1&sender_device=pc" target="_blank" rel="noopener noreferrer">
+                <img src="https://i.imgur.com/F4027rQ.png" alt="TikTok" class="tiktok-link-image" onerror="this.onerror=null;this.src='https://placehold.co/30x9/e0e0e0/333333?text=TikTok'">
+            </a>
         </div>
     </header>
 
@@ -443,12 +462,7 @@
         <div id="photo-detail" class="artwork-detail"></div>
     </main>
 
-    <!-- FOOTER -->
-    <footer>
-        <a href="https://www.tiktok.com/@serhatyuecel?is_from_webapp=1&sender_device=pc" target="_blank" rel="noopener noreferrer">
-            <img src="https://i.imgur.com/F4027rQ.png" alt="Go to TikTok Profile" class="tiktok-link-image" onerror="this.onerror=null;this.src='https://placehold.co/30x9/e0e0e0/333333?text=TikTok'">
-        </a>
-    </footer>
+
 
     <!-- Fullscreen Image Viewer -->
     <div id="fullscreen-overlay" class="fullscreen-overlay">
