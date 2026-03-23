@@ -15,27 +15,10 @@
     <title>serhat yuecel studio</title>
 
     <style>
-       
         @font-face {
             font-family: 'Apple Garamond';
             src: url('SYS/fonts/AppleGaramond.ttf') format('truetype');
             font-weight: 400;
-            font-style: normal;
-            font-display: swap;
-        }
-
-        @font-face {
-            font-family: 'Apple Garamond';
-            src: url('SYS/fonts/AppleGaramond.ttf') format('truetype');
-            font-weight: 400;
-            font-style: italic;
-            font-display: swap;
-        }
-
-        @font-face {
-            font-family: 'Apple Garamond';
-            src: url('SYS/fonts/AppleGaramond.ttf') format('truetype');
-            font-weight: 700;
             font-style: normal;
             font-display: swap;
         }
@@ -68,7 +51,6 @@
             align-items: center;
             padding: 0rem 1rem;
             margin-bottom: 0;
-            gap: 0;
             position: relative;
         }
 
@@ -117,26 +99,18 @@
             font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', 'Helvetica Neue', Helvetica, Arial, sans-serif;
             font-size: 0.95rem;
             font-weight: 600;
-            letter-spacing: 0;
             white-space: nowrap;
             transition: color 0.25s ease;
         }
 
-        /* Active state: black */
-        .nav-section.active .nav-label {
-            color: var(--nav-active);
-        }
-
-        /* Inactive state: greyed out */
-        .nav-section.inactive .nav-label {
-            color: var(--nav-inactive);
-        }
+        .nav-section.active .nav-label { color: var(--nav-active); }
+        .nav-section.inactive .nav-label { color: var(--nav-inactive); }
 
         /* ─── GALLERY ─────────────────────────────────────────────── */
         .gallery-container {
             max-width: 1200px;
             margin: 3rem auto 0;
-            padding: 0 1rem 0rem;
+            padding: 0 1rem;
             flex-grow: 1;
         }
 
@@ -147,13 +121,11 @@
             list-style: none;
             padding: 0;
             margin: 0;
-            justify-content: center;
         }
 
         .artwork-item {
             position: relative;
             background: transparent;
-            border-radius: 0;
             overflow: hidden;
             box-shadow: none;
             transition: transform 0.3s ease;
@@ -167,17 +139,8 @@
             padding: 12px;
             justify-content: center;
         }
-        
-        .artwork-item:hover {
-            transform: translateY(-5px);
-            box-shadow: none;
-        }
 
-        .artwork-item a {
-            text-decoration: none;
-            color: inherit;
-            display: block;
-        }
+        .artwork-item:hover { transform: translateY(-5px); }
 
         .artwork-image {
             width: 100%;
@@ -188,25 +151,15 @@
             display: block;
         }
 
-        .artwork-title {
-            display: none;
-            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', 'Helvetica Neue', Helvetica, Arial;
-            font-weight: 600;
-            font-size: 1.2rem;
-            padding: 1rem 0;
-            user-select: none;
-            width: 100%;
-        }
+        .artwork-title { display: none; }
 
         /* ─── DETAIL VIEW ─────────────────────────────────────────── */
         .artwork-detail {
             display: none;
             padding: 0;
             background-color: transparent;
-            border-radius: 0;
             max-width: 640px;
             margin: 0 auto;
-            box-shadow: none;
         }
 
         .detail-image {
@@ -215,19 +168,13 @@
             max-width: 560px;
             max-height: 60vh;
             object-fit: contain;
-            margin: 0 auto 0;
+            margin: 0 auto;
             display: block;
             cursor: pointer;
         }
 
-        .detail-image.large-detail {
-            max-width: 1000px;
-            max-height: 85vh;
-        }
-          
-        .detail-image.itaped-adjust {
-            margin-top: -40px;
-        }
+        .detail-image.large-detail { max-width: 1000px; max-height: 85vh; }
+        .detail-image.itaped-adjust { margin-top: -40px; }
 
         .detail-info {
             display: grid;
@@ -240,7 +187,6 @@
         }
 
         .detail-info h2 {
-            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', 'Helvetica Neue', Helvetica, Arial, sans-serif;
             font-size: 1.5rem;
             font-weight: 600;
             margin-top: 0;
@@ -249,25 +195,15 @@
             text-overflow: ellipsis;
         }
 
-        .detail-info strong {
-            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', 'Helvetica Neue', Helvetica, Arial;
-            font-weight: 600;
-        }
+        .detail-info strong { font-weight: 600; }
 
-        .detail-info span,
-        .price-line {
-            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-        }
-        
         /* ─── FULLSCREEN ──────────────────────────────────────────── */
         .fullscreen-overlay {
             display: none;
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.9);
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-color: rgba(0,0,0,0.9);
             justify-content: center;
             align-items: center;
             z-index: 1000;
@@ -284,29 +220,19 @@
 
         .close-button {
             position: absolute;
-            top: 20px;
-            right: 30px;
+            top: 20px; right: 30px;
             font-size: 2rem;
             color: #fff;
             cursor: pointer;
-            user-select: none;
         }
 
-        /* ─── FOOTER ──────────────────────────────────────────────── */
-        footer {
-            margin-top: 3rem;
-            padding: 2rem 1rem 1rem;
-            text-align: center;
-        }
-
+        /* ─── SERIES TITLE ────────────────────────────────────────── */
         .series-title {
-            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', 'Helvetica Neue', Helvetica, Arial, sans-serif;
             font-size: 1.8rem;
             font-weight: 600;
             color: var(--nav-active);
             letter-spacing: 0.04em;
             margin: 0 0 1.5rem 0;
-            padding: 0;
         }
 
         .tiktok-link-image {
@@ -316,37 +242,7 @@
             transition: opacity 0.3s ease, transform 0.3s ease;
         }
 
-        .tiktok-link-image:hover {
-            opacity: 0.9;
-            transform: scale(1.05);
-        }
-        
-        /* ─── RESPONSIVE ──────────────────────────────────────────── */
-        @media (max-width: 768px) {
-            .gallery {
-                grid-template-columns: 1fr;
-            }
-            .detail-info {
-                grid-template-columns: 1fr;
-            }
-            header {
-                gap: 1rem;
-            }
-        }
-
-        @media (min-width: 1024px) {
-            .gallery {
-                grid-template-columns: repeat(4, 1fr);
-            }
-        }
-
-        .logo-text {
-            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', 'Helvetica Neue', Helvetica, Arial;
-        }
-
-        h1.logo-text {
-          margin: 0;
-        }
+        .tiktok-link-image:hover { opacity: 0.9; transform: scale(1.05); }
 
         /* ─── PHOTO LIGHTBOX ──────────────────────────────────────── */
         .photo-lightbox {
@@ -354,15 +250,13 @@
             position: fixed;
             top: 0; left: 0;
             width: 100%; height: 100%;
-            background-color: rgba(0, 0, 0, 0.93);
+            background-color: rgba(0,0,0,0.93);
             z-index: 2000;
             justify-content: center;
             align-items: center;
         }
 
-        .photo-lightbox.open {
-            display: flex;
-        }
+        .photo-lightbox.open { display: flex; }
 
         .lightbox-img {
             max-width: 85vw;
@@ -384,7 +278,6 @@
             padding: 1rem;
             opacity: 0.6;
             transition: opacity 0.2s ease;
-            user-select: none;
             line-height: 1;
         }
 
@@ -400,7 +293,6 @@
             cursor: pointer;
             opacity: 0.6;
             transition: opacity 0.2s ease;
-            user-select: none;
         }
         .lightbox-close:hover { opacity: 1; }
 
@@ -412,15 +304,51 @@
             color: #fff;
             font-size: 0.8rem;
             opacity: 0.5;
-            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
             letter-spacing: 0.1em;
+        }
+
+        /* ─── RESPONSIVE ──────────────────────────────────────────── */
+        @media (max-width: 768px) {
+            .gallery {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .detail-info {
+                grid-template-columns: 1fr;
+            }
+            /* Stack header vertically on mobile */
+            header {
+                flex-direction: column;
+                align-items: center;
+                padding-top: 0.75rem;
+                padding-bottom: 0.75rem;
+            }
+            .header-logo-wrap {
+                order: 1;
+            }
+            .nav-links {
+                order: 2;
+                position: static;
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                gap: 1.5rem;
+                margin-top: 0.5rem;
+            }
+            .header-tiktok {
+                order: 3;
+                position: static;
+                margin-top: 0.5rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .gallery { grid-template-columns: repeat(4, 1fr); }
         }
     </style>
 </head>
 <body>
 
     <header>
-        <!-- Centered logo -->
         <div class="header-logo-wrap">
             <a href="#" onclick="showGallery(); return false;">
                 <img src="https://imgur.com/zslzw0O.jpg"
@@ -430,7 +358,6 @@
             </a>
         </div>
 
-        <!-- Nav links top left -->
         <nav class="nav-links">
             <div class="nav-section active" id="nav-art" onclick="switchSection('art')">
                 <span class="nav-label">Traditional Art</span>
@@ -440,137 +367,60 @@
             </div>
         </nav>
 
-        <!-- TikTok top right -->
         <div class="header-tiktok">
             <a href="https://www.tiktok.com/@serhatyuecel?is_from_webapp=1&sender_device=pc" target="_blank" rel="noopener noreferrer">
-                <img src="https://i.imgur.com/F4027rQ.png" alt="TikTok" class="tiktok-link-image" onerror="this.onerror=null;this.src='https://placehold.co/30x9/e0e0e0/333333?text=TikTok'">
+                <img src="https://i.imgur.com/F4027rQ.png" alt="TikTok" class="tiktok-link-image"
+                     onerror="this.onerror=null;this.src='https://placehold.co/30x9/e0e0e0/333333?text=TikTok'">
             </a>
         </div>
     </header>
 
-    <!-- ─── TRADITIONAL ART SECTION ─────────────────────────────── -->
     <main class="gallery-container" id="section-art">
         <ul id="main-gallery" class="gallery"></ul>
         <div id="artwork-detail" class="artwork-detail"></div>
     </main>
 
-    <!-- ─── PHOTOGRAPHY SECTION ──────────────────────────────────── -->
     <main class="gallery-container" id="section-photo" style="display:none;">
-        <div id="photo-gallery-wrapper">
-            <!-- Series injected dynamically -->
-        </div>
+        <div id="photo-gallery-wrapper"></div>
         <div id="photo-detail" class="artwork-detail"></div>
     </main>
 
-
-
-    <!-- Fullscreen Image Viewer -->
     <div id="fullscreen-overlay" class="fullscreen-overlay">
         <span class="close-button" onclick="closeFullscreenView()">&times;</span>
         <img id="fullscreen-image" class="fullscreen-image" src="" alt="">
     </div>
 
+    <div id="photo-lightbox" class="photo-lightbox" onclick="closeLightbox(event)">
+        <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+        <button class="lightbox-arrow prev" onclick="lightboxNav(-1, event)">&#8249;</button>
+        <img id="lightbox-img" class="lightbox-img" src="" alt="">
+        <button class="lightbox-arrow next" onclick="lightboxNav(1, event)">&#8250;</button>
+        <div id="lightbox-counter" class="lightbox-counter"></div>
+    </div>
+
     <script>
-        // ─── TRADITIONAL ART DATA ────────────────────────────────────
         const artworks = {
-            "ts-v-ye": {
-                name: "Taylor Swift v Ye",
-                year: "2025",
-                medium: "Mixed Media on canvas Paper",
-                size: "105cm x 198cm",
-                description: "A colorful and explosive portrayal of two controversial figures.",
-                price: "PRICE ON REQUEST"
-            },
-            "wonderful-again": {
-                name: "Make America Wonderful Again",
-                year: "2025",
-                medium: "Mixed Media on Paper",
-                size: "35.5cm x 27.7cm",
-                description: "What America thinks of itself.",
-                price: "PRICE ON REQUEST"
-            },
-            "damaged": {
-                name: "Damaged",
-                year: "2025",
-                medium: "Mixed Media on Cotton Board",
-                size: "50cm x 50cm",
-                description: "An abstract display of Trump and his 'damaged' mind.",
-                price: "PRICE ON REQUEST"
-            },
-            "batman-kills": {
-                name: "BATMAN KILLS",
-                year: "2025",
-                medium: "Mixed Media on Cotton Board",
-                size: "147mm x 66mm",
-                description: "Depiction of an Emirati banknote with a controversial opinion about the Dark Knight.",
-                price: "PRICE ON REQUEST"
-            },
-            "itaped": {
-                name: "iTaped",
-                year: "2025",
-                medium: "Colored Pencil on Cotton Board",
-                size: "50cm x 50cm",
-                description: "A experimental Version of the famous Comedian with a Twist that remembers Apple's innovative and long lost \"i\"",
-                price: "PRICE ON REQUEST"
-            },
-            "kal-el-no": {
-                name: "KAL EL NO",
-                year: "2025",
-                medium: "Mixed Media on canvas Paper",
-                description: "Gal Gadots Famous and terrible line in Zack Snyders Justice League painted with political flair",
-                size: "20cm x 20cm",
-                price: "PRICE ON REQUEST"
-            },
-            "free-will-and-capitalism": {
-                name: "FREE WILL AND CAPITALISM",
-                year: "2025",
-                medium: "Mixed Media on Paper",
-                size: "50cm x 50cm",
-                description: "Walmart and its sudden state of being a playground for Viral Social Media Content",
-                price: "PRICE ON REQUEST"
-            },
-            "air-before-2016": {
-                name: "AIR BEFORE 2016",
-                year: "2025",
-                medium: "Mixed Media on Canvas",
-                size: "N/A",
-                description: "Unique Air of a Time without Division, Minimalism and Mediocrity",
-                price: "PRICE ON REQUEST"
-            }
+            "ts-v-ye": { name: "Taylor Swift v Ye", year: "2025", medium: "Mixed Media on canvas Paper", size: "105cm x 198cm", description: "A colorful and explosive portrayal of two controversial figures.", price: "PRICE ON REQUEST" },
+            "wonderful-again": { name: "Make America Wonderful Again", year: "2025", medium: "Mixed Media on Paper", size: "35.5cm x 27.7cm", description: "What America thinks of itself.", price: "PRICE ON REQUEST" },
+            "damaged": { name: "Damaged", year: "2025", medium: "Mixed Media on Cotton Board", size: "50cm x 50cm", description: "An abstract display of Trump and his 'damaged' mind.", price: "PRICE ON REQUEST" },
+            "batman-kills": { name: "BATMAN KILLS", year: "2025", medium: "Mixed Media on Cotton Board", size: "147mm x 66mm", description: "Depiction of an Emirati banknote with a controversial opinion about the Dark Knight.", price: "PRICE ON REQUEST" },
+            "itaped": { name: "iTaped", year: "2025", medium: "Colored Pencil on Cotton Board", size: "50cm x 50cm", description: "A experimental Version of the famous Comedian with a Twist that remembers Apple's innovative and long lost \"i\"", price: "PRICE ON REQUEST" },
+            "kal-el-no": { name: "KAL EL NO", year: "2025", medium: "Mixed Media on canvas Paper", size: "20cm x 20cm", description: "Gal Gadots Famous and terrible line in Zack Snyders Justice League painted with political flair", price: "PRICE ON REQUEST" },
+            "free-will-and-capitalism": { name: "FREE WILL AND CAPITALISM", year: "2025", medium: "Mixed Media on Paper", size: "50cm x 50cm", description: "Walmart and its sudden state of being a playground for Viral Social Media Content", price: "PRICE ON REQUEST" },
+            "air-before-2016": { name: "AIR BEFORE 2016", year: "2025", medium: "Mixed Media on Canvas", size: "N/A", description: "Unique Air of a Time without Division, Minimalism and Mediocrity", price: "PRICE ON REQUEST" }
         };
 
         const imageSources = {
-            "ts-v-ye": {
-                gallery: "https://i.imgur.com/BvtFNyO.jpeg",
-                detail: "https://i.imgur.com/XmvfLin.jpeg"
-            },
-            "wonderful-again": {
-                gallery: "https://i.imgur.com/6zSXpMF.jpeg",
-                detail: "https://i.imgur.com/ko2UzS7.jpeg"
-            },
-            "damaged": {
-                gallery: "https://i.imgur.com/hKaHoP5.jpeg",
-                detail: "https://i.imgur.com/kYtaN1d.jpeg"
-            },
+            "ts-v-ye": { gallery: "https://i.imgur.com/BvtFNyO.jpeg", detail: "https://i.imgur.com/XmvfLin.jpeg" },
+            "wonderful-again": { gallery: "https://i.imgur.com/6zSXpMF.jpeg", detail: "https://i.imgur.com/ko2UzS7.jpeg" },
+            "damaged": { gallery: "https://i.imgur.com/hKaHoP5.jpeg", detail: "https://i.imgur.com/kYtaN1d.jpeg" },
             "batman-kills": "https://i.imgur.com/BXoqmYY.png",
-            "itaped": {
-                gallery: "https://i.imgur.com/bNlXMcU.png",
-                detail: "https://i.imgur.com/bsQeOpO.jpeg"
-            },
+            "itaped": { gallery: "https://i.imgur.com/bNlXMcU.png", detail: "https://i.imgur.com/bsQeOpO.jpeg" },
             "kal-el-no": "https://i.imgur.com/xMnAQsl.jpeg",
-            "free-will-and-capitalism": {
-                gallery: "https://imgur.com/U6Ev36c.jpg",
-                detail: "https://imgur.com/lu25Guo.jpg"
-            },
-            "air-before-2016": {
-                gallery: "https://i.imgur.com/NWn4VAc.jpeg",
-                detail: "https://i.imgur.com/NWn4VAc.jpeg"
-            }
+            "free-will-and-capitalism": { gallery: "https://imgur.com/U6Ev36c.jpg", detail: "https://imgur.com/lu25Guo.jpg" },
+            "air-before-2016": { gallery: "https://i.imgur.com/NWn4VAc.jpeg", detail: "https://i.imgur.com/NWn4VAc.jpeg" }
         };
 
-        // ─── PHOTOGRAPHY DATA ────────────────────────────────────────
-        // Each series: id, title, photos object, sources object.
-        // To add real images: replace placehold.co URLs with your Imgur links.
         const photoSeries = [
             {
                 id: "kenopsia",
@@ -592,33 +442,20 @@
                     "kenopsia-6": { gallery: "https://i.imgur.com/CKBJWT4.jpg", detail: "https://i.imgur.com/CKBJWT4.jpg" }
                 }
             }
-            // Add more series here following the same pattern
         ];
 
-        // Flat lookup maps built from series (used by detail view)
         const photos = {};
         const photoSources = {};
-        photoSeries.forEach(s => {
-            Object.assign(photos, s.photos);
-            Object.assign(photoSources, s.sources);
-        });
+        photoSeries.forEach(s => { Object.assign(photos, s.photos); Object.assign(photoSources, s.sources); });
 
-        // ─── CURRENT STATE ───────────────────────────────────────────
-        let currentSection = 'art'; // 'art' or 'photo'
+        let currentSection = 'art';
 
-        // ─── SECTION SWITCHING ───────────────────────────────────────
         function switchSection(section) {
             currentSection = section;
-
-            // Update nav states
             document.getElementById('nav-art').className  = 'nav-section ' + (section === 'art'   ? 'active' : 'inactive');
             document.getElementById('nav-photo').className = 'nav-section ' + (section === 'photo' ? 'active' : 'inactive');
-
-            // Show/hide sections
             document.getElementById('section-art').style.display   = section === 'art'   ? 'block' : 'none';
             document.getElementById('section-photo').style.display = section === 'photo' ? 'block' : 'none';
-
-            // Always reset to gallery view when switching
             if (section === 'art') {
                 document.getElementById('main-gallery').style.display = 'grid';
                 document.getElementById('artwork-detail').style.display = 'none';
@@ -626,12 +463,10 @@
                 document.getElementById('photo-gallery-wrapper').style.display = 'block';
                 document.getElementById('photo-detail').style.display = 'none';
             }
-
             history.pushState({ view: 'gallery', section }, '', location.pathname + (section === 'photo' ? '#photography' : ''));
             window.scrollTo(0, 0);
         }
 
-        // ─── BUILD GALLERY ───────────────────────────────────────────
         function createGalleryItems() {
             buildGallery('main-gallery', artworks, imageSources, showArtworkDetail);
             buildPhotoGallery();
@@ -640,22 +475,12 @@
         function buildGallery(listId, dataObj, srcObj, clickFn) {
             const galleryList = document.getElementById(listId);
             galleryList.innerHTML = '';
-
             for (const key of Object.keys(dataObj)) {
                 const item = dataObj[key];
                 const listItem = document.createElement('li');
                 listItem.className = 'artwork-item';
-                listItem.setAttribute('data-id', key);
-
-                const imageSrc = (typeof srcObj[key] === 'object' && srcObj[key].gallery)
-                                 ? srcObj[key].gallery
-                                 : (srcObj[key] || 'https://placehold.co/500x500/A0A0A0/ffffff?text=Image+Not+Found');
-
-                listItem.innerHTML = `
-                    <img src="${imageSrc}" alt="${item.name}" class="artwork-image" onerror="this.onerror=null;this.src='https://placehold.co/500x500/A0A0A0/ffffff?text=Image+Not+Found'">
-                    <div class="artwork-title"></div>
-                `;
-
+                const imageSrc = (typeof srcObj[key] === 'object' && srcObj[key].gallery) ? srcObj[key].gallery : (srcObj[key] || 'https://placehold.co/500x500/A0A0A0/ffffff?text=Not+Found');
+                listItem.innerHTML = `<img src="${imageSrc}" alt="${item.name}" class="artwork-image" onerror="this.onerror=null;this.src='https://placehold.co/500x500/A0A0A0/ffffff?text=Not+Found'"><div class="artwork-title"></div>`;
                 listItem.addEventListener('click', () => clickFn(key));
                 galleryList.appendChild(listItem);
             }
@@ -664,105 +489,50 @@
         function buildPhotoGallery() {
             const wrapper = document.getElementById('photo-gallery-wrapper');
             wrapper.innerHTML = '';
-
             photoSeries.forEach(series => {
-                // Series title heading
                 const heading = document.createElement('h2');
                 heading.className = 'series-title';
                 heading.textContent = series.title;
                 wrapper.appendChild(heading);
-
-                // Grid for this series
                 const grid = document.createElement('ul');
                 grid.className = 'gallery';
                 grid.id = 'photo-gallery-' + series.id;
-
                 for (const key of Object.keys(series.photos)) {
                     const photo = series.photos[key];
                     const src = series.sources[key];
-                    const imageSrc = (src && src.gallery) ? src.gallery : 'https://placehold.co/500x500/A0A0A0/ffffff?text=Image+Not+Found';
-
+                    const imageSrc = (src && src.gallery) ? src.gallery : 'https://placehold.co/500x500/A0A0A0/ffffff?text=Not+Found';
                     const listItem = document.createElement('li');
                     listItem.className = 'artwork-item';
-                    listItem.setAttribute('data-id', key);
-                    listItem.innerHTML = `
-                        <img src="${imageSrc}" alt="${photo.name}" class="artwork-image" onerror="this.onerror=null;this.src='https://placehold.co/500x500/A0A0A0/ffffff?text=Image+Not+Found'">
-                        <div class="artwork-title"></div>
-                    `;
+                    listItem.innerHTML = `<img src="${imageSrc}" alt="${photo.name}" class="artwork-image" onerror="this.onerror=null;this.src='https://placehold.co/500x500/A0A0A0/ffffff?text=Not+Found'"><div class="artwork-title"></div>`;
                     listItem.addEventListener('click', () => openLightbox(key));
                     grid.appendChild(listItem);
                 }
-
                 wrapper.appendChild(grid);
             });
         }
 
-        // ─── ART DETAIL ──────────────────────────────────────────────
         function showArtworkDetail(id) {
             history.pushState({ view: 'detail', section: 'art', id }, '', `#artwork-${id}`);
-
-            const gallery    = document.getElementById('main-gallery');
+            const gallery = document.getElementById('main-gallery');
             const detailView = document.getElementById('artwork-detail');
-            const artwork    = artworks[id];
+            const artwork = artworks[id];
             if (!artwork) return;
-
-            const imageSrc = (typeof imageSources[id] === 'object' && imageSources[id].detail)
-                             ? imageSources[id].detail
-                             : (imageSources[id] || 'https://placehold.co/500x500/A0A0A0/ffffff?text=Image+Not+Found');
-
+            const imageSrc = (typeof imageSources[id] === 'object' && imageSources[id].detail) ? imageSources[id].detail : (imageSources[id] || 'https://placehold.co/500x500/A0A0A0/ffffff?text=Not+Found');
             detailView.innerHTML = `
-                <img src="${imageSrc}" alt="${artwork.name}" class="detail-image ${id === 'itaped' ? 'large-detail itaped-adjust' : ''}" onclick="openFullscreenView('${imageSrc}')" onerror="this.onerror=null;this.src='https://placehold.co/800x600/A0A0A0/ffffff?text=Image+Not+Found'">
-                <div class="detail-info">
-                    <div>
-                        <h2>${artwork.name}</h2>
-                        <div style="margin-bottom: 1.5rem; font-weight: 300; font-style: italic; line-height: 1.5;">${artwork.description || ''}</div>
-                        <strong>Year:</strong> <span>${artwork.year}</span><br>
-                        <strong>Medium:</strong> <span>${artwork.medium}</span><br>
-                        <strong>Size:</strong> <span>${artwork.size}</span>
-                        <div class="price-line" style="margin-top: 0.5rem; font-weight: 600; color: var(--primary-color);">${artwork.price}</div>
-                    </div>
-                    <div></div>
-                </div>
-            `;
-
+                <img src="${imageSrc}" alt="${artwork.name}" class="detail-image ${id === 'itaped' ? 'large-detail itaped-adjust' : ''}" onclick="openFullscreenView('${imageSrc}')" onerror="this.onerror=null;this.src='https://placehold.co/800x600/A0A0A0/ffffff?text=Not+Found'">
+                <div class="detail-info"><div>
+                    <h2>${artwork.name}</h2>
+                    <div style="margin-bottom:1.5rem;font-weight:300;font-style:italic;line-height:1.5;">${artwork.description || ''}</div>
+                    <strong>Year:</strong> <span>${artwork.year}</span><br>
+                    <strong>Medium:</strong> <span>${artwork.medium}</span><br>
+                    <strong>Size:</strong> <span>${artwork.size}</span>
+                    <div class="price-line" style="margin-top:0.5rem;font-weight:600;">${artwork.price}</div>
+                </div></div>`;
             gallery.style.display = 'none';
             detailView.style.display = 'block';
             window.scrollTo(0, 0);
         }
 
-        // ─── PHOTO DETAIL ─────────────────────────────────────────────
-        function showPhotoDetail(id) {
-            history.pushState({ view: 'detail', section: 'photo', id }, '', `#photo-${id}`);
-
-            const gallery    = document.getElementById('photo-gallery');
-            const detailView = document.getElementById('photo-detail');
-            const photo      = photos[id];
-            if (!photo) return;
-
-            const imageSrc = (typeof photoSources[id] === 'object' && photoSources[id].detail)
-                             ? photoSources[id].detail
-                             : (photoSources[id] || 'https://placehold.co/500x500/A0A0A0/ffffff?text=Image+Not+Found');
-
-            detailView.innerHTML = `
-                <img src="${imageSrc}" alt="${photo.name}" class="detail-image" onclick="openFullscreenView('${imageSrc}')" onerror="this.onerror=null;this.src='https://placehold.co/800x600/A0A0A0/ffffff?text=Image+Not+Found'">
-                <div class="detail-info">
-                    <div>
-                        <h2>${photo.name}</h2>
-                        <div style="margin-bottom: 1.5rem; font-weight: 300; font-style: italic; line-height: 1.5;">${photo.description || ''}</div>
-                        <strong>Year:</strong> <span>${photo.year}</span><br>
-                        ${photo.location ? `<strong>Location:</strong> <span>${photo.location}</span><br>` : ''}
-                        <div class="price-line" style="margin-top: 0.5rem; font-weight: 600; color: var(--primary-color);">${photo.price}</div>
-                    </div>
-                    <div></div>
-                </div>
-            `;
-
-            gallery.style.display = 'none';
-            detailView.style.display = 'block';
-            window.scrollTo(0, 0);
-        }
-
-        // ─── SHOW GALLERY (back button / logo click) ──────────────────
         function showGallery() {
             if (currentSection === 'art') {
                 document.getElementById('main-gallery').style.display = 'grid';
@@ -773,11 +543,9 @@
             }
         }
 
-        // ─── FULLSCREEN ───────────────────────────────────────────────
         function openFullscreenView(imageSrc) {
             const overlay = document.getElementById('fullscreen-overlay');
-            const image   = document.getElementById('fullscreen-image');
-            image.src = imageSrc;
+            document.getElementById('fullscreen-image').src = imageSrc;
             overlay.style.display = 'flex';
         }
 
@@ -785,48 +553,10 @@
             document.getElementById('fullscreen-overlay').style.display = 'none';
         }
 
-        // ─── BROWSER NAVIGATION ───────────────────────────────────────
-        window.addEventListener('popstate', (event) => {
-            const state = event.state;
-            if (!state || state.view === 'gallery') {
-                showGallery();
-                return;
-            }
-            if (state.view === 'detail') {
-                if (state.section === 'photo') showPhotoDetail(state.id);
-                else showArtworkDetail(state.id);
-            }
-        });
-
-        // ─── INIT ─────────────────────────────────────────────────────
-        document.addEventListener('DOMContentLoaded', () => {
-            createGalleryItems();
-
-            if (!history.state) {
-                history.replaceState({ view: 'gallery', section: 'art' }, '', location.pathname);
-            }
-
-            // Deep link support
-            if (location.hash.startsWith('#artwork-')) {
-                const id = location.hash.replace('#artwork-', '');
-                if (artworks[id]) showArtworkDetail(id);
-            } else if (location.hash.startsWith('#photo-')) {
-                const id = location.hash.replace('#photo-', '');
-                switchSection('photo');
-                if (photos[id]) showPhotoDetail(id);
-            } else if (location.hash === '#photography') {
-                switchSection('photo');
-            } else {
-                showGallery();
-            }
-        });
-
-        // ─── PHOTO LIGHTBOX ──────────────────────────────────────────
-        let lightboxPhotos = []; // flat array of {id, src} for current series
-        let lightboxIndex  = 0;
+        let lightboxPhotos = [];
+        let lightboxIndex = 0;
 
         function openLightbox(photoId) {
-            // Build ordered list of all photos across all series
             lightboxPhotos = [];
             photoSeries.forEach(series => {
                 Object.keys(series.photos).forEach(key => {
@@ -834,7 +564,6 @@
                     lightboxPhotos.push({ id: key, src: (src && src.detail) ? src.detail : src });
                 });
             });
-
             lightboxIndex = lightboxPhotos.findIndex(p => p.id === photoId);
             if (lightboxIndex === -1) lightboxIndex = 0;
             renderLightbox();
@@ -845,8 +574,7 @@
         function renderLightbox() {
             const item = lightboxPhotos[lightboxIndex];
             document.getElementById('lightbox-img').src = item.src;
-            document.getElementById('lightbox-counter').textContent =
-                (lightboxIndex + 1) + ' / ' + lightboxPhotos.length;
+            document.getElementById('lightbox-counter').textContent = (lightboxIndex + 1) + ' / ' + lightboxPhotos.length;
         }
 
         function lightboxNav(dir, event) {
@@ -856,29 +584,37 @@
         }
 
         function closeLightbox(event) {
-            if (event && event.target !== document.getElementById('photo-lightbox') &&
-                !event.target.classList.contains('lightbox-close')) return;
+            if (event && event.target !== document.getElementById('photo-lightbox') && !event.target.classList.contains('lightbox-close')) return;
             document.getElementById('photo-lightbox').classList.remove('open');
             document.body.style.overflow = '';
         }
 
-        // Keyboard navigation for lightbox
         document.addEventListener('keydown', (e) => {
             const lb = document.getElementById('photo-lightbox');
             if (!lb.classList.contains('open')) return;
             if (e.key === 'ArrowRight') lightboxNav(1, null);
-            if (e.key === 'ArrowLeft')  lightboxNav(-1, null);
-            if (e.key === 'Escape')     { lb.classList.remove('open'); document.body.style.overflow = ''; }
+            if (e.key === 'ArrowLeft') lightboxNav(-1, null);
+            if (e.key === 'Escape') { lb.classList.remove('open'); document.body.style.overflow = ''; }
+        });
+
+        window.addEventListener('popstate', (event) => {
+            const state = event.state;
+            if (!state || state.view === 'gallery') { showGallery(); return; }
+            if (state.view === 'detail' && state.section === 'art') showArtworkDetail(state.id);
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            createGalleryItems();
+            if (!history.state) history.replaceState({ view: 'gallery', section: 'art' }, '', location.pathname);
+            if (location.hash.startsWith('#artwork-')) {
+                const id = location.hash.replace('#artwork-', '');
+                if (artworks[id]) showArtworkDetail(id);
+            } else if (location.hash === '#photography') {
+                switchSection('photo');
+            } else {
+                showGallery();
+            }
         });
     </script>
-
-    <!-- Photo Lightbox -->
-    <div id="photo-lightbox" class="photo-lightbox" onclick="closeLightbox(event)">
-        <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
-        <button class="lightbox-arrow prev" onclick="lightboxNav(-1, event)">&#8249;</button>
-        <img id="lightbox-img" class="lightbox-img" src="" alt="">
-        <button class="lightbox-arrow next" onclick="lightboxNav(1, event)">&#8250;</button>
-        <div id="lightbox-counter" class="lightbox-counter"></div>
-    </div>
 </body>
 </html>
