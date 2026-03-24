@@ -339,6 +339,39 @@
           margin: 0;
         }
 
+        /* ─── CONTACT ────────────────────────────────────────────── */
+        .contact-wrapper {
+            max-width: 480px;
+            margin: 4rem auto 0;
+        }
+
+        .contact-block {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+            margin-top: 2rem;
+        }
+
+        .contact-line {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+            color: var(--primary-color);
+            font-size: 1.05rem;
+            font-weight: 400;
+            transition: opacity 0.2s ease;
+        }
+
+        .contact-line:hover {
+            opacity: 0.6;
+        }
+
+        .contact-icon {
+            font-size: 1.1rem;
+            opacity: 0.5;
+        }
+
         /* ─── PHOTO LIGHTBOX ──────────────────────────────────────── */
         .photo-lightbox {
             display: none;
@@ -429,6 +462,9 @@
             <div class="nav-section inactive" id="nav-photo" onclick="switchSection('photo')">
                 <span class="nav-label">Photography</span>
             </div>
+            <div class="nav-section inactive" id="nav-contact" onclick="switchSection('contact')">
+                <span class="nav-label">Contact</span>
+            </div>
         </nav>
 
         <!-- TikTok top right -->
@@ -456,6 +492,19 @@
 
 
     <!-- Fullscreen Image Viewer -->
+    <!-- ─── CONTACT SECTION ──────────────────────────────────────── -->
+    <main class="gallery-container" id="section-contact" style="display:none;">
+        <div id="contact-content" style="max-width:480px; margin: 4rem auto 0; padding: 0 1rem;">
+            <h2 style="font-size:1.8rem; font-weight:600; margin:0 0 1.5rem 0; letter-spacing:0.01em;">Serhat Yücel</h2>
+            <p style="margin:0 0 0.6rem 0; font-size:1rem; font-weight:300;">
+                <a href="mailto:serhat02@live.de" style="color:var(--primary-color); text-decoration:none;">serhat02@live.de</a>
+            </p>
+            <p style="margin:0; font-size:1rem; font-weight:300;">
+                <a href="tel:+491794728414" style="color:var(--primary-color); text-decoration:none;">+49 179 4728414</a>
+            </p>
+        </div>
+    </main>
+
     <div id="fullscreen-overlay" class="fullscreen-overlay">
         <span class="close-button" onclick="closeFullscreenView()">&times;</span>
         <img id="fullscreen-image" class="fullscreen-image" src="" alt="">
@@ -601,24 +650,24 @@
         function switchSection(section) {
             currentSection = section;
 
-            // Update nav states
-            document.getElementById('nav-art').className  = 'nav-section ' + (section === 'art'   ? 'active' : 'inactive');
-            document.getElementById('nav-photo').className = 'nav-section ' + (section === 'photo' ? 'active' : 'inactive');
+            document.getElementById('nav-art').className     = 'nav-section ' + (section === 'art'     ? 'active' : 'inactive');
+            document.getElementById('nav-photo').className   = 'nav-section ' + (section === 'photo'   ? 'active' : 'inactive');
+            document.getElementById('nav-contact').className = 'nav-section ' + (section === 'contact' ? 'active' : 'inactive');
 
-            // Show/hide sections
-            document.getElementById('section-art').style.display   = section === 'art'   ? 'block' : 'none';
-            document.getElementById('section-photo').style.display = section === 'photo' ? 'block' : 'none';
+            document.getElementById('section-art').style.display     = section === 'art'     ? 'block' : 'none';
+            document.getElementById('section-photo').style.display   = section === 'photo'   ? 'block' : 'none';
+            document.getElementById('section-contact').style.display = section === 'contact' ? 'block' : 'none';
 
-            // Always reset to gallery view when switching
             if (section === 'art') {
                 document.getElementById('main-gallery').style.display = 'grid';
                 document.getElementById('artwork-detail').style.display = 'none';
-            } else {
+            } else if (section === 'photo') {
                 document.getElementById('photo-gallery-wrapper').style.display = 'block';
                 document.getElementById('photo-detail').style.display = 'none';
             }
 
-            history.pushState({ view: 'gallery', section }, '', location.pathname + (section === 'photo' ? '#photography' : ''));
+            const hash = section === 'photo' ? '#photography' : section === 'contact' ? '#contact' : '';
+            history.pushState({ view: 'gallery', section }, '', location.pathname + hash);
             window.scrollTo(0, 0);
         }
 
