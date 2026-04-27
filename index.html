@@ -7,6 +7,7 @@
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
+
   gtag('config', 'G-MKJ38MNNCE');
 </script>
     
@@ -45,94 +46,83 @@
             --background-color: #ffffff;
             --light-grey: #e0e0e0;
             --black-overlay: rgba(0, 0, 0, 0.7);
-            --nav-active: #111111;
-            --nav-inactive: #b0b0b0;
         }
 
         body {
+            /* The main font is Apple SF */
             font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', 'Helvetica Neue', Helvetica, Arial, sans-serif;
             background-color: var(--background-color);
             color: var(--primary-color);
             margin: 0;
             padding: 0rem 1rem;
             line-height: 1.6;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
+            display: flex; /* Flexbox for the entire body */
+            flex-direction: column; /* Arrange elements vertically */
+            min-height: 100vh; /* Minimum height of the viewport */
         }
 
-        /* ─── HEADER ─────────────────────────────────────────────── */
         header {
-            display: grid;
-            grid-template-columns: 1fr auto 1fr;
+            /* Updated to use flexbox for a dynamic layout */
+            display: flex;
+            justify-content: space-between;
             align-items: center;
-            padding: 0.5rem 1rem;
+            padding: 0rem 1rem; /* Changed from 0rem 2rem to reduce vertical space */
+            /* Border removed as requested */
             margin-bottom: 0;
         }
-
-        .header-logo-wrap {
-            grid-column: 2;
-            display: flex;
-            justify-content: center;
+        
+        /* This empty div helps to center the logo text using flexbox */
+        .header-left {
+            flex: 1;
         }
 
+        .header-right {
+            flex: 1;
+            text-align: right;
+        }
+
+        /* Styling for the new logo link */
+        header .logo-link {
+            text-decoration: none;
+        }
+
+        /* Styles for the Image logo */
         .logo-image {
             height: 80px;
             width: auto;
-            object-fit: contain;
-            display: block;
+            vertical-align: middle;
             transition: opacity 0.3s ease;
+            object-fit: contain; /* Ensures the image fits without cropping */
+            display: block;
+            margin-top: 12px;
         }
 
-        .header-logo-wrap a:hover .logo-image {
-            opacity: 0.7;
+        /* Adjust hover effect for the logo (e.g., subtle darkening) */
+        header .logo-link:hover .logo-image {
+            opacity: 0.8;
         }
 
-        .nav-links {
-            grid-column: 1;
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-        }
-
-        .header-tiktok {
-            grid-column: 3;
-            display: flex;
-            align-items: center;
-            justify-content: flex-end;
-        }
-
-        .nav-section {
+        .social-link {
             text-decoration: none;
-            cursor: pointer;
-            transition: color 0.2s ease;
-            background: none;
-            border: none;
-            padding: 0;
+            color: var(--primary-color);
+            transition: color 0.3s ease;
         }
 
-        .nav-label {
-            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-            font-size: 0.95rem;
-            font-weight: 600;
-            letter-spacing: 0;
-            white-space: nowrap;
-            transition: color 0.25s ease;
+        .social-link:hover {
+            color: #000;
         }
-
-        .nav-section.active .nav-label { color: var(--nav-active); }
-        .nav-section.inactive .nav-label { color: var(--nav-inactive); }
-
-        /* ─── GALLERY ─────────────────────────────────────────────── */
+        
+        /* Styles for the main gallery view */
         .gallery-container {
             max-width: 1200px;
             margin: 3rem auto 0;
-            padding: 0 1rem 6rem;
-            flex-grow: 1;
+            padding: 0 1rem 0rem;
+            flex-grow: 1; /* Allows the main content to take up available space */
         }
 
         .gallery {
             display: grid;
+            /* HIER ANPASSUNG FÜR 4 SPALTEN (1FR = gleicher Anteil) */
             grid-template-columns: repeat(4, 1fr);
             gap: 1rem;
             list-style: none;
@@ -150,9 +140,13 @@
             transition: transform 0.3s ease;
             text-align: center;
             cursor: pointer;
+
+            /* Center the content horizontally in the item */
             display: flex;
             flex-direction: column;
             align-items: center;
+
+        
             aspect-ratio: 1 / 1;
             box-sizing: border-box;
             padding: 12px;
@@ -170,43 +164,47 @@
             display: block;
         }
 
+        /* ✅ NUR DIESE LANDINGPAGE-ÄNDERUNG:
+           Bilder füllen die Kachel gleichmäßig, ohne beschnitten zu werden */
         .artwork-image {
             width: 100%;
             height: 100%;
             max-width: 100%;
             max-height: 100%;
-            object-fit: contain;
+            object-fit: contain;   /* KEIN CROPPING */
             display: block;
         }
 
+        /* Using Apple SF */
+        /* Title in the gallery view is now hidden, but the class remains for structure */
         .artwork-title {
-            display: none;
+            display: none; /* NEU: Versteckt den Titel in der Galerieansicht */
             font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', 'Helvetica Neue', Helvetica, Arial;
             font-weight: 600;
             font-size: 1.2rem;
             padding: 1rem 0;
             user-select: none;
-            width: 100%;
+            width: 100%; /* Stellt sicher, dass der Titel die gesamte Breite einnimmt */
         }
 
-        /* ─── DETAIL VIEW ─────────────────────────────────────────── */
+        /* Styles for the artwork detail page */
         .artwork-detail {
             display: none;
-            padding: 0;
+            padding: 0; /* changed from 1rem */
             background-color: transparent;
             border-radius: 0;
-            max-width: 640px;
-            margin: 0 auto;
+            max-width: 640px; /* reduced from 800px */
+            margin: 0 auto; /* changed from 1rem auto */
             box-shadow: none;
         }
 
         .detail-image {
             width: 100%;
             height: auto;
-            max-width: 560px;
-            max-height: 60vh;
+            max-width: 560px; /* new: limit image width inside container */
+            max-height: 60vh; /* new: reduce vertical size */
             object-fit: contain;
-            margin: 0 auto 0;
+            margin: 0 auto 0; /* changed from 0 auto 0.25rem to reduce spacing below image */
             display: block;
             cursor: pointer;
         }
@@ -214,45 +212,52 @@
         .detail-image.large-detail {
             max-width: 1000px;
             max-height: 85vh;
-        }
+          }
           
         .detail-image.itaped-adjust {
-            margin-top: -40px;
+            margin-top: -40px; /* moves image up; adjust value if needed */
         }
+
+        /* Removed .detail-media and related styles as requested */
 
         .detail-info {
             display: grid;
-            grid-template-columns: 1fr;
-            gap: 0.5rem;
+            grid-template-columns: 1fr; /* single column for a tighter layout */
+            gap: 0.5rem; /* reduced from 1rem */
             font-weight: 300;
-            margin-bottom: 0.5rem;
-            font-size: 0.95rem;
-            margin-top: 0.25rem;
+            margin-bottom: 0.5rem; /* changed from 1rem */
+            font-size: 0.95rem; /* slightly smaller text */
+            margin-top: 0.25rem; /* Added to ensure info block starts immediately under the image */
         }
 
+        /* Using Apple SF */
         .detail-info h2 {
             font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-            font-size: 1.5rem;
+            font-size: 1.5rem; /* reduced from 2rem */
             font-weight: 600;
             margin-top: 0;
+            
+            /* NEU: Titel auf eine Zeile beschränken */
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
         }
 
+        /* Labels in detail (e.g., Year:, Medium:, Size:) use SF */
         .detail-info strong {
             font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', 'Helvetica Neue', Helvetica, Arial;
             font-weight: 600;
         }
 
+        /* Values and price use Apple SF */
         .detail-info span,
         .price-line {
             font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', 'Helvetica Neue', Helvetica, Arial, sans-serif;
         }
         
-        /* ─── FULLSCREEN ──────────────────────────────────────────── */
+        /* New styles for the fullscreen viewer */
         .fullscreen-overlay {
-            display: none;
+            display: none; /* Hidden by default */
             position: fixed;
             top: 0;
             left: 0;
@@ -283,25 +288,15 @@
             user-select: none;
         }
 
-        /* ─── FOOTER ──────────────────────────────────────────────── */
+        /* STYLES FOR THE FOOTER */
         footer {
             margin-top: 3rem;
             padding: 2rem 1rem 1rem;
-            text-align: center;
-        }
-
-        .series-title {
-            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-            font-size: 1.8rem;
-            font-weight: 600;
-            color: var(--nav-active);
-            letter-spacing: 0.04em;
-            margin: 0 0 1.5rem 0;
-            padding: 0;
+            text-align: center; /* Center the content */
         }
 
         .tiktok-link-image {
-            width: 30px;
+            width: 30px; /* AUF 30PX REDUZIERT */
             height: auto;
             object-fit: contain;
             transition: opacity 0.3s ease, transform 0.3s ease;
@@ -312,8 +307,9 @@
             transform: scale(1.05);
         }
         
-        /* ─── RESPONSIVE ──────────────────────────────────────────── */
+        /* Responsive adjustments */
         @media (max-width: 768px) {
+            /* Auf kleinen Bildschirmen nur eine Spalte beibehalten */
             .gallery {
                 grid-template-columns: 1fr;
             }
@@ -321,10 +317,15 @@
                 grid-template-columns: 1fr;
             }
             header {
-                gap: 1rem;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .header-right {
+                text-align: left;
+                margin-top: 1rem;
             }
         }
-
+        /* Media Query für 4er-Reihen auf größeren Bildschirmen */
         @media (min-width: 1024px) {
             .gallery {
                 grid-template-columns: repeat(4, 1fr);
@@ -338,175 +339,65 @@
         h1.logo-text {
           margin: 0;
         }
-
-        /* ─── CONTACT ────────────────────────────────────────────── */
-        .contact-wrapper {
-            max-width: 480px;
-            margin: 4rem auto 0;
-        }
-
-        .contact-block {
-            display: flex;
-            flex-direction: column;
-            gap: 1.2rem;
-            margin-top: 2rem;
-        }
-
-        .contact-line {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            text-decoration: none;
-            color: var(--primary-color);
-            font-size: 1.05rem;
-            font-weight: 400;
-            transition: opacity 0.2s ease;
-        }
-
-        .contact-line:hover {
-            opacity: 0.6;
-        }
-
-        .contact-icon {
-            font-size: 1.1rem;
-            opacity: 0.5;
-        }
-
-        /* ─── PHOTO LIGHTBOX ──────────────────────────────────────── */
-        .photo-lightbox {
-            display: none;
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background-color: rgba(0, 0, 0, 0.93);
-            z-index: 2000;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .photo-lightbox.open {
-            display: flex;
-        }
-
-        .lightbox-img {
-            max-width: 85vw;
-            max-height: 85vh;
-            object-fit: contain;
-            user-select: none;
-            pointer-events: none;
-        }
-
-        .lightbox-arrow {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: none;
-            border: none;
-            color: #fff;
-            font-size: 2.5rem;
-            cursor: pointer;
-            padding: 1rem;
-            opacity: 0.6;
-            transition: opacity 0.2s ease;
-            user-select: none;
-            line-height: 1;
-        }
-
-        .lightbox-arrow:hover { opacity: 1; }
-        .lightbox-arrow.prev { left: 1rem; }
-        .lightbox-arrow.next { right: 1rem; }
-
-        .lightbox-close {
-            position: absolute;
-            top: 1.2rem; right: 1.5rem;
-            font-size: 2rem;
-            color: #fff;
-            cursor: pointer;
-            opacity: 0.6;
-            transition: opacity 0.2s ease;
-            user-select: none;
-        }
-        .lightbox-close:hover { opacity: 1; }
-
-        .lightbox-counter {
-            position: absolute;
-            bottom: 1.5rem;
-            left: 50%;
-            transform: translateX(-50%);
-            color: #fff;
-            font-size: 0.8rem;
-            opacity: 0.5;
-            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
-            letter-spacing: 0.1em;
-        }
     </style>
 </head>
 <body>
 
     <header>
-        <div class="header-logo-wrap">
-            <a href="#" onclick="showGallery(); return false;">
-                <img src="https://imgur.com/zslzw0O.jpg"
-                     alt="Serhat Yuecel Logo"
-                     class="logo-image"
-                     onerror="this.onerror=null;this.src='https://placehold.co/80x80/f0f0f0/333333?text=SY'">
+        <!-- This empty div helps to push the logo to the center -->
+        <div class="header-left"></div>
+        
+        <!-- The logo is now an image loaded via Imgur link -->
+        <h1 class="logo-text">
+            <a href="#" class="logo-link" onclick="showGallery(); return false;">
+                <!-- Using the new Imgur link for the logo -->
+                <img src="https://imgur.com/zslzw0O.jpg" alt="Serhat Yuecel Logo" class="logo-image" onerror="this.onerror=null;this.src='https://placehold.co/80x80/f0f0f0/333333?text=SY'">
             </a>
-        </div>
+        </h1>
 
-        <nav class="nav-links">
-            <div class="nav-section active" id="nav-art" onclick="switchSection('art')">
-                <span class="nav-label">Traditional Art</span>
-            </div>
-            <div class="nav-section inactive" id="nav-photo" onclick="switchSection('photo')">
-                <span class="nav-label">Photography</span>
-            </div>
-            <div class="nav-section inactive" id="nav-contact" onclick="switchSection('contact')">
-                <span class="nav-label">Contact</span>
-            </div>
-        </nav>
-
-        <div class="header-tiktok">
-            <a href="https://www.tiktok.com/@serhatyuecel?is_from_webapp=1&sender_device=pc" target="_blank" rel="noopener noreferrer">
-                <img src="https://i.imgur.com/F4027rQ.png" alt="TikTok" class="tiktok-link-image" onerror="this.onerror=null;this.src='https://placehold.co/30x9/e0e0e0/333333?text=TikTok'">
-            </a>
+        <!-- TikTok text link was removed. -->
+        <div class="header-right">
+            <!-- Left empty -->
         </div>
     </header>
 
-    <main class="gallery-container" id="section-art">
-        <ul id="main-gallery" class="gallery"></ul>
-        <div id="artwork-detail" class="artwork-detail"></div>
-    </main>
+    <main class="gallery-container">
+        <!-- Main gallery view -->
+        <ul id="main-gallery" class="gallery">
+            <!-- Gallery items will be dynamically generated here -->
+        </ul>
 
-    <main class="gallery-container" id="section-photo" style="display:none;">
-        <div id="photo-gallery-wrapper">
-            </div>
-        <div id="photo-detail" class="artwork-detail"></div>
-    </main>
-
-
-
-    <main class="gallery-container" id="section-contact" style="display:none;">
-        <div id="contact-content" style="max-width:480px; margin: 4rem auto 0; padding: 0 1rem;">
-            <h2 style="font-size:1.8rem; font-weight:600; margin:0 0 2rem 0; letter-spacing:0.01em;">Serhat Yücel</h2>
-            <p style="margin:0 0 1rem 0; font-size:1rem; font-weight:300; display:flex; align-items:center; gap:0.6rem;">
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-                <a href="mailto:serhat02@live.de" style="color:var(--primary-color); text-decoration:none;">serhat02@live.de</a>
-            </p>
-            <p style="margin:0; font-size:1rem; font-weight:300; display:flex; align-items:center; gap:0.6rem;">
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.62 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7a2 2 0 0 1 1.72 2.02z"/></svg>
-                <a href="tel:+491794728414" style="color:var(--primary-color); text-decoration:none;">+49 179 4728414</a>
-            </p>
+        <!-- Artwork detail view -->
+        <div id="artwork-detail" class="artwork-detail">
+            <!-- Artwork details will be dynamically injected here -->
         </div>
     </main>
 
+    <!-- FOOTER FOR TIKTOK LINK -->
+    <footer>
+        <a href="https://www.tiktok.com/@serhatyuecel?is_from_webapp=1&sender_device=pc" target="_blank" rel="noopener noreferrer">
+            <!-- Using the direct Imgur image URL as a link -->
+            <img src="https://i.imgur.com/F4027rQ.png" alt="Go to TikTok Profile" class="tiktok-link-image" onerror="this.onerror=null;this.src='https://placehold.co/30x9/e0e0e0/333333?text=TikTok'">
+        </a>
+    </footer>
+
+    <!-- Fullscreen Image Viewer -->
     <div id="fullscreen-overlay" class="fullscreen-overlay">
         <span class="close-button" onclick="closeFullscreenView()">&times;</span>
         <img id="fullscreen-image" class="fullscreen-image" src="" alt="">
     </div>
 
     <script>
-        // ─── TRADITIONAL ART DATA ────────────────────────────────────
+        // Use a single JavaScript object to hold all artwork data
         const artworks = {
+            "inner-child": {
+                name: "INNER CHILD",
+                year: "2026",
+                medium: "Oil on Canvas",
+                size: "TBD",
+                description: "The Revival of the innocence and Divine Essence within us all.",
+                price: "PRICE ON REQUEST"
+            },
             "ts-v-ye": {
                 name: "Taylor Swift v Ye",
                 year: "2025",
@@ -537,7 +428,7 @@
                 medium: "Mixed Media on Cotton Board",
                 size: "147mm x 66mm",
                 description: "Depiction of an Emirati banknote with a controversial opinion about the Dark Knight.",
-                price: "PRICE ON REQUEST"
+                price: "RESERVED"
             },
             "itaped": {
                 name: "iTaped",
@@ -568,12 +459,18 @@
                 year: "2025",
                 medium: "Mixed Media on Canvas",
                 size: "N/A",
+                // UPDATED DESCRIPTION
                 description: "Unique Air of a Time without Division, Minimalism and Mediocrity",
                 price: "PRICE ON REQUEST"
             }
         };
 
+        // This object holds the links to the images.
         const imageSources = {
+            "inner-child": {
+                gallery: "https://i.imgur.com/0QJ51WQ.jpeg",
+                detail: "https://i.imgur.com/0QJ51WQ.jpeg"
+            },
             "ts-v-ye": {
                 gallery: "https://i.imgur.com/BvtFNyO.jpeg",
                 detail: "https://i.imgur.com/XmvfLin.jpeg"
@@ -596,212 +493,84 @@
                 gallery: "https://imgur.com/U6Ev36c.jpg",
                 detail: "https://imgur.com/lu25Guo.jpg"
             },
+            // AKTUALISIERTER BILDQUELLE FÜR "AIR BEFORE 2016" (Verifizierte direkte Imgur-URL)
             "air-before-2016": {
                 gallery: "https://i.imgur.com/NWn4VAc.jpeg",
                 detail: "https://i.imgur.com/NWn4VAc.jpeg"
             }
         };
-
-        // ─── PHOTOGRAPHY DATA ────────────────────────────────────────
-        // Each series: id, title, photos object, sources object.
-        // To add real images: replace placehold.co URLs with your Imgur links.
-        const photoSeries = [
-            {
-                id: "kenopsia",
-                title: "KENOPSIA",
-                photos: {
-                    "kenopsia-1": { name: "KENOPSIA #1", year: "2025", location: "", description: "", price: "PRICE ON REQUEST" },
-                    "kenopsia-2": { name: "KENOPSIA #2", year: "2025", location: "", description: "", price: "PRICE ON REQUEST" },
-                    "kenopsia-3": { name: "KENOPSIA #3", year: "2025", location: "", description: "", price: "PRICE ON REQUEST" },
-                    "kenopsia-4": { name: "KENOPSIA #4", year: "2025", location: "", description: "", price: "PRICE ON REQUEST" },
-                    "kenopsia-5": { name: "KENOPSIA #5", year: "2025", location: "", description: "", price: "PRICE ON REQUEST" },
-                    "kenopsia-6": { name: "KENOPSIA #6", year: "2025", location: "", description: "", price: "PRICE ON REQUEST" }
-                },
-                sources: {
-                    "kenopsia-1": { gallery: "https://i.imgur.com/F7IRHRz.jpg", detail: "https://i.imgur.com/F7IRHRz.jpg" },
-                    "kenopsia-2": { gallery: "https://i.imgur.com/fW1M6TT.jpg", detail: "https://i.imgur.com/fW1M6TT.jpg" },
-                    "kenopsia-3": { gallery: "https://i.imgur.com/khyjKrn.jpg", detail: "https://i.imgur.com/khyjKrn.jpg" },
-                    "kenopsia-4": { gallery: "https://i.imgur.com/EWsLXVJ.jpg", detail: "https://i.imgur.com/EWsLXVJ.jpg" },
-                    "kenopsia-5": { gallery: "https://i.imgur.com/VaTioir.jpg", detail: "https://i.imgur.com/VaTioir.jpg" },
-                    "kenopsia-6": { gallery: "https://i.imgur.com/CKBJWT4.jpg", detail: "https://i.imgur.com/CKBJWT4.jpg" }
-                }
-            }
-            ,
-            {
-                id: "waiting",
-                title: "WAITING",
-                photos: {
-                    "waiting-1": { name: "WAITING #1", year: "2025", location: "", description: "", price: "PRICE ON REQUEST" },
-                    "waiting-2": { name: "WAITING #2", year: "2025", location: "", description: "", price: "PRICE ON REQUEST" },
-                    "waiting-3": { name: "WAITING #3", year: "2025", location: "", description: "", price: "PRICE ON REQUEST" }
-                },
-                sources: {
-                    "waiting-1": { gallery: "https://i.imgur.com/PCKDuo5.jpg", detail: "https://i.imgur.com/PCKDuo5.jpg" },
-                    "waiting-2": { gallery: "https://i.imgur.com/U37zAa1.jpg", detail: "https://i.imgur.com/U37zAa1.jpg" },
-                    "waiting-3": { gallery: "https://i.imgur.com/V93HXex.jpg", detail: "https://i.imgur.com/V93HXex.jpg" }
-                }
-            }
-        ];
-
-        // Flat lookup maps built from series (used by detail view)
-        const photos = {};
-        const photoSources = {};
-        photoSeries.forEach(s => {
-            Object.assign(photos, s.photos);
-            Object.assign(photoSources, s.sources);
-        });
-
-        // ─── CURRENT STATE ───────────────────────────────────────────
-        let currentSection = 'art'; // 'art' or 'photo'
-
-        // ─── SECTION SWITCHING ───────────────────────────────────────
-        function switchSection(section) {
-            currentSection = section;
-
-            document.getElementById('nav-art').className     = 'nav-section ' + (section === 'art'     ? 'active' : 'inactive');
-            document.getElementById('nav-photo').className   = 'nav-section ' + (section === 'photo'   ? 'active' : 'inactive');
-            document.getElementById('nav-contact').className = 'nav-section ' + (section === 'contact' ? 'active' : 'inactive');
-
-            document.getElementById('section-art').style.display     = section === 'art'     ? 'block' : 'none';
-            document.getElementById('section-photo').style.display   = section === 'photo'   ? 'block' : 'none';
-            document.getElementById('section-contact').style.display = section === 'contact' ? 'block' : 'none';
-
-            if (section === 'art') {
-                document.getElementById('main-gallery').style.display = 'grid';
-                document.getElementById('artwork-detail').style.display = 'none';
-            } else if (section === 'photo') {
-                document.getElementById('photo-gallery-wrapper').style.display = 'block';
-                document.getElementById('photo-detail').style.display = 'none';
-            }
-
-            const hash = section === 'photo' ? '#photography' : section === 'contact' ? '#contact' : '';
-            history.pushState({ view: 'gallery', section }, '', location.pathname + hash);
-            window.scrollTo(0, 0);
-        }
-
-        // ─── BUILD GALLERY ───────────────────────────────────────────
+        
+        // Function to create the HTML for the gallery items
         function createGalleryItems() {
-            buildGallery('main-gallery', artworks, imageSources, showArtworkDetail);
-            buildPhotoGallery();
-        }
-
-        function buildGallery(listId, dataObj, srcObj, clickFn) {
-            const galleryList = document.getElementById(listId);
+            const galleryList = document.getElementById('main-gallery');
+            // Clears the gallery before re-rendering
             galleryList.innerHTML = '';
-
-            for (const key of Object.keys(dataObj)) {
-                const item = dataObj[key];
+            for (const key in artworks) {
+                const artwork = artworks[key];
                 const listItem = document.createElement('li');
                 listItem.className = 'artwork-item';
-                listItem.setAttribute('data-id', key);
+                listItem.setAttribute('data-artwork-id', key);
 
-                const imageSrc = (typeof srcObj[key] === 'object' && srcObj[key].gallery)
-                                 ? srcObj[key].gallery
-                                 : (srcObj[key] || 'https://placehold.co/500x500/A0A0A0/ffffff?text=Image+Not+Found');
+                // Check if the image source is an object with a 'gallery' property
+                const imageSrc = (typeof imageSources[key] === 'object' && imageSources[key].gallery)
+                                 ? imageSources[key].gallery
+                                 : (imageSources[key] || 'https://placehold.co/500x500/A0A0A0/ffffff?text=Image+Not+Found');
 
+                // *** NEU: Entfernen des Titels aus der Hauptgalerie-Ansicht (via CSS display: none) ***
                 listItem.innerHTML = `
-                    <img src="${imageSrc}" alt="${item.name}" class="artwork-image" onerror="this.onerror=null;this.src='https://placehold.co/500x500/A0A0A0/ffffff?text=Image+Not+Found'">
-                    <div class="artwork-title"></div>
+                    <img src="${imageSrc}" alt="${artwork.name}" class="artwork-image" onerror="this.onerror=null;this.src='https://placehold.co/500x500/A0A0A0/ffffff?text=Image+Not+Found'">
+                    <div class="artwork-title"></div> 
                 `;
-
-                listItem.addEventListener('click', () => clickFn(key));
+                
+                listItem.addEventListener('click', () => showArtworkDetail(key));
                 galleryList.appendChild(listItem);
             }
         }
 
-        function buildPhotoGallery() {
-            const wrapper = document.getElementById('photo-gallery-wrapper');
-            wrapper.innerHTML = '';
-
-            photoSeries.forEach(series => {
-                // Series title heading
-                const heading = document.createElement('h2');
-                heading.className = 'series-title';
-                heading.textContent = series.title;
-                wrapper.appendChild(heading);
-
-                // Grid for this series
-                const grid = document.createElement('ul');
-                grid.className = 'gallery';
-                grid.id = 'photo-gallery-' + series.id;
-
-                for (const key of Object.keys(series.photos)) {
-                    const photo = series.photos[key];
-                    const src = series.sources[key];
-                    const imageSrc = (src && src.gallery) ? src.gallery : 'https://placehold.co/500x500/A0A0A0/ffffff?text=Image+Not+Found';
-
-                    const listItem = document.createElement('li');
-                    listItem.className = 'artwork-item';
-                    listItem.setAttribute('data-id', key);
-                    listItem.innerHTML = `
-                        <img src="${imageSrc}" alt="${photo.name}" class="artwork-image" onerror="this.onerror=null;this.src='https://placehold.co/500x500/A0A0A0/ffffff?text=Image+Not+Found'">
-                        <div class="artwork-title"></div>
-                    `;
-                    listItem.addEventListener('click', () => openLightbox(key));
-                    grid.appendChild(listItem);
-                }
-
-                wrapper.appendChild(grid);
-            });
-        }
-
-        // ─── ART DETAIL ──────────────────────────────────────────────
+        // Function to show the artwork details
         function showArtworkDetail(id) {
-            history.pushState({ view: 'detail', section: 'art', id }, '', `#artwork-${id}`);
+            // Push a history state so the browser Back button returns to the gallery
+            history.pushState({ view: 'detail', id }, '', `#artwork-${id}`);
 
-            const gallery    = document.getElementById('main-gallery');
+            const gallery = document.getElementById('main-gallery');
             const detailView = document.getElementById('artwork-detail');
-            const artwork    = artworks[id];
-            if (!artwork) return;
+            const artwork = artworks[id];
 
+            if (!artwork) {
+                console.error('Artwork not found for ID:', id);
+                return;
+            }
+
+            // Check if the image source is an object with a 'detail' property
             const imageSrc = (typeof imageSources[id] === 'object' && imageSources[id].detail)
                              ? imageSources[id].detail
                              : (imageSources[id] || 'https://placehold.co/500x500/A0A0A0/ffffff?text=Image+Not+Found');
 
+            // HIER WIRD DER INHALT DER DETAIL-ANSICHT NEU STRUKTURIERT (Titel bleibt hier erhalten!)
             detailView.innerHTML = `
                 <img src="${imageSrc}" alt="${artwork.name}" class="detail-image ${id === 'itaped' ? 'large-detail itaped-adjust' : ''}" onclick="openFullscreenView('${imageSrc}')" onerror="this.onerror=null;this.src='https://placehold.co/800x600/A0A0A0/ffffff?text=Image+Not+Found'">
+                
                 <div class="detail-info">
                     <div>
+                        <!-- 1. Title (One line enforced by CSS, remains visible here) -->
                         <h2>${artwork.name}</h2>
+                        
+                        <!-- 2. Description (Now between Title and details) -->
                         <div style="margin-bottom: 1.5rem; font-weight: 300; font-style: italic; line-height: 1.5;">${artwork.description || ''}</div>
+                        
+                        <!-- 3. Details -->
                         <strong>Year:</strong> <span>${artwork.year}</span><br>
                         <strong>Medium:</strong> <span>${artwork.medium}</span><br>
                         <strong>Size:</strong> <span>${artwork.size}</span>
+                        
+                        <!-- 4. Price (Now under Size) -->
                         <div class="price-line" style="margin-top: 0.5rem; font-weight: 600; color: var(--primary-color);">${artwork.price}</div>
+                        
                     </div>
-                    <div></div>
-                </div>
-            `;
-
-            gallery.style.display = 'none';
-            detailView.style.display = 'block';
-            window.scrollTo(0, 0);
-        }
-
-        // ─── PHOTO DETAIL ─────────────────────────────────────────────
-        function showPhotoDetail(id) {
-            history.pushState({ view: 'detail', section: 'photo', id }, '', `#photo-${id}`);
-
-            const gallery    = document.getElementById('photo-gallery');
-            const detailView = document.getElementById('photo-detail');
-            const photo      = photos[id];
-            if (!photo) return;
-
-            const imageSrc = (typeof photoSources[id] === 'object' && photoSources[id].detail)
-                             ? photoSources[id].detail
-                             : (photoSources[id] || 'https://placehold.co/500x500/A0A0A0/ffffff?text=Image+Not+Found');
-
-            detailView.innerHTML = `
-                <img src="${imageSrc}" alt="${photo.name}" class="detail-image" onclick="openFullscreenView('${imageSrc}')" onerror="this.onerror=null;this.src='https://placehold.co/800x600/A0A0A0/ffffff?text=Image+Not+Found'">
-                <div class="detail-info">
+                    <!-- Right column is now empty as all primary info is in the first column -->
                     <div>
-                        <h2>${photo.name}</h2>
-                        <div style="margin-bottom: 1.5rem; font-weight: 300; font-style: italic; line-height: 1.5;">${photo.description || ''}</div>
-                        <strong>Year:</strong> <span>${photo.year}</span><br>
-                        ${photo.location ? `<strong>Location:</strong> <span>${photo.location}</span><br>` : ''}
-                        <div class="price-line" style="margin-top: 0.5rem; font-weight: 600; color: var(--primary-color);">${photo.price}</div>
+                        
                     </div>
-                    <div></div>
                 </div>
             `;
 
@@ -810,122 +579,70 @@
             window.scrollTo(0, 0);
         }
 
-        // ─── SHOW GALLERY (back button / logo click) ──────────────────
+        // Function to go back to the gallery
         function showGallery() {
-            if (currentSection === 'art') {
-                document.getElementById('main-gallery').style.display = 'grid';
-                document.getElementById('artwork-detail').style.display = 'none';
-            } else {
-                document.getElementById('photo-gallery-wrapper').style.display = 'block';
-                document.getElementById('photo-detail').style.display = 'none';
+            // Ensure we have a base gallery state so Back does not leave the site
+            if (!history.state || history.state.view !== 'gallery') {
+                history.pushState({ view: 'gallery' }, '', location.pathname);
             }
+
+            const gallery = document.getElementById('main-gallery');
+            const detailView = document.getElementById('artwork-detail');
+            gallery.style.display = 'grid';
+            detailView.style.display = 'none';
         }
 
-        // ─── FULLSCREEN ───────────────────────────────────────────────
+        // Function to open the fullscreen view
         function openFullscreenView(imageSrc) {
             const overlay = document.getElementById('fullscreen-overlay');
-            const image   = document.getElementById('fullscreen-image');
+            const image = document.getElementById('fullscreen-image');
             image.src = imageSrc;
             overlay.style.display = 'flex';
         }
 
+        // Function to close the fullscreen view
         function closeFullscreenView() {
-            document.getElementById('fullscreen-overlay').style.display = 'none';
+            const overlay = document.getElementById('fullscreen-overlay');
+            overlay.style.display = 'none';
         }
 
-        // ─── BROWSER NAVIGATION ───────────────────────────────────────
+        // Handle browser navigation (Back/Forward)
         window.addEventListener('popstate', (event) => {
             const state = event.state;
             if (!state || state.view === 'gallery') {
-                showGallery();
+                // Show gallery when no state or gallery state
+                const gallery = document.getElementById('main-gallery');
+                const detailView = document.getElementById('artwork-detail');
+                gallery.style.display = 'grid';
+                detailView.style.display = 'none';
                 return;
             }
-            if (state.view === 'detail') {
-                if (state.section === 'photo') showPhotoDetail(state.id);
-                else showArtworkDetail(state.id);
+
+            if (state.view === 'detail' && state.id) {
+                // Reopen the detail for the given artwork id
+                showArtworkDetail(state.id);
             }
         });
 
-        // ─── INIT ─────────────────────────────────────────────────────
         document.addEventListener('DOMContentLoaded', () => {
             createGalleryItems();
 
+            // Set an initial gallery state if none exists
             if (!history.state) {
-                history.replaceState({ view: 'gallery', section: 'art' }, '', location.pathname);
+                history.replaceState({ view: 'gallery' }, '', location.pathname);
             }
 
-            // Deep link support
-            if (location.hash.startsWith('#artwork-')) {
+            // Support deep linking via hash like #artwork-<id>
+            if (location.hash && location.hash.startsWith('#artwork-')) {
                 const id = location.hash.replace('#artwork-', '');
-                if (artworks[id]) showArtworkDetail(id);
-            } else if (location.hash.startsWith('#photo-')) {
-                const id = location.hash.replace('#photo-', '');
-                switchSection('photo');
-                if (photos[id]) showPhotoDetail(id);
-            } else if (location.hash === '#photography') {
-                switchSection('photo');
+                if (artworks[id]) {
+                    showArtworkDetail(id);
+                }
             } else {
+                // Ensure gallery is visible on first load
                 showGallery();
             }
         });
-
-        // ─── PHOTO LIGHTBOX ──────────────────────────────────────────
-        let lightboxPhotos = []; // flat array of {id, src} for current series
-        let lightboxIndex  = 0;
-
-        function openLightbox(photoId) {
-            // Build ordered list of all photos across all series
-            lightboxPhotos = [];
-            photoSeries.forEach(series => {
-                Object.keys(series.photos).forEach(key => {
-                    const src = series.sources[key];
-                    lightboxPhotos.push({ id: key, src: (src && src.detail) ? src.detail : src });
-                });
-            });
-
-            lightboxIndex = lightboxPhotos.findIndex(p => p.id === photoId);
-            if (lightboxIndex === -1) lightboxIndex = 0;
-            renderLightbox();
-            document.getElementById('photo-lightbox').classList.add('open');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function renderLightbox() {
-            const item = lightboxPhotos[lightboxIndex];
-            document.getElementById('lightbox-img').src = item.src;
-            document.getElementById('lightbox-counter').textContent =
-                (lightboxIndex + 1) + ' / ' + lightboxPhotos.length;
-        }
-
-        function lightboxNav(dir, event) {
-            if (event) event.stopPropagation();
-            lightboxIndex = (lightboxIndex + dir + lightboxPhotos.length) % lightboxPhotos.length;
-            renderLightbox();
-        }
-
-        function closeLightbox(event) {
-            if (event && event.target !== document.getElementById('photo-lightbox') &&
-                !event.target.classList.contains('lightbox-close')) return;
-            document.getElementById('photo-lightbox').classList.remove('open');
-            document.body.style.overflow = '';
-        }
-
-        // Keyboard navigation for lightbox
-        document.addEventListener('keydown', (e) => {
-            const lb = document.getElementById('photo-lightbox');
-            if (!lb.classList.contains('open')) return;
-            if (e.key === 'ArrowRight') lightboxNav(1, null);
-            if (e.key === 'ArrowLeft')  lightboxNav(-1, null);
-            if (e.key === 'Escape')     { lb.classList.remove('open'); document.body.style.overflow = ''; }
-        });
     </script>
-
-    <div id="photo-lightbox" class="photo-lightbox" onclick="closeLightbox(event)">
-        <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
-        <button class="lightbox-arrow prev" onclick="lightboxNav(-1, event)">&#8249;</button>
-        <img id="lightbox-img" class="lightbox-img" src="" alt="">
-        <button class="lightbox-arrow next" onclick="lightboxNav(1, event)">&#8250;</button>
-        <div id="lightbox-counter" class="lightbox-counter"></div>
-    </div>
 </body>
 </html>
