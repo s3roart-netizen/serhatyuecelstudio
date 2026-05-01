@@ -120,6 +120,13 @@
             flex-grow: 1; /* Allows the main content to take up available space */
         }
 
+        /* Full-width container for masonry gallery */
+        .gallery-container.full-width {
+            max-width: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
         .gallery {
             display: grid;
             /* HIER ANPASSUNG FÜR 4 SPALTEN (1FR = gleicher Anteil) */
@@ -254,6 +261,75 @@
         .price-line {
             font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', 'Helvetica Neue', Helvetica, Arial, sans-serif;
         }
+
+        /* Contact page styles */
+        .contact-view {
+            max-width: 640px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        .contact-content h2 {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', 'Helvetica Neue', Helvetica, Arial;
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .contact-intro {
+            font-size: 1rem;
+            line-height: 1.8;
+            margin-bottom: 3rem;
+            text-align: center;
+            color: #666;
+        }
+
+        .contact-methods {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .contact-method {
+            text-align: center;
+            padding: 2rem;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            transition: box-shadow 0.3s ease;
+        }
+
+        .contact-method:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-method h3 {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', 'Helvetica Neue', Helvetica, Arial;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .contact-link {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', 'Helvetica Neue', Helvetica, Arial;
+            font-size: 1.1rem;
+            color: #ff69b4;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-link:hover {
+            color: #ff1493;
+            text-decoration: underline;
+        }
+
+        @media (min-width: 768px) {
+            .contact-methods {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
         
         /* New styles for the fullscreen viewer */
         .fullscreen-overlay {
@@ -339,6 +415,84 @@
         h1.logo-text {
           margin: 0;
         }
+
+        /* Navigation menu styles */
+        .nav-menu {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1rem;
+            padding: 0.5rem 0;
+        }
+
+        .nav-link {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', 'Helvetica Neue', Helvetica, Arial;
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: #999;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .nav-link:hover {
+            color: #666;
+        }
+
+        .nav-link.active {
+            color: #ff69b4;
+        }
+
+        /* Masonry gallery styles - CJ Hendry inspired clean grid */
+        .masonry-gallery {
+            column-count: 4;
+            column-gap: 8px;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            width: 100%;
+        }
+
+        .masonry-item {
+            break-inside: avoid;
+            margin: 0 0 8px 0;
+            padding: 0;
+            cursor: pointer;
+            transition: opacity 0.2s ease;
+            position: relative;
+        }
+
+        .masonry-item:hover {
+            opacity: 0.85;
+        }
+
+        .masonry-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+            margin: 0;
+            padding: 0;
+            vertical-align: middle;
+        }
+
+        @media (max-width: 1024px) {
+            .masonry-gallery {
+                column-count: 3;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .masonry-gallery {
+                column-count: 2;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .masonry-gallery {
+                column-count: 1;
+            }
+        }
     </style>
 </head>
 <body>
@@ -361,15 +515,47 @@
         </div>
     </header>
 
+    <!-- Navigation Menu -->
+    <nav class="nav-menu">
+        <a href="#" class="nav-link" id="nav-home" onclick="showHome(); return false;">Home</a>
+        <a href="#" class="nav-link" id="nav-gallery" onclick="showMasonryGallery(); return false;">Gallery</a>
+        <a href="#" class="nav-link" id="nav-contact" onclick="showContact(); return false;">Contact</a>
+    </nav>
+
     <main class="gallery-container">
-        <!-- Main gallery view -->
+        <!-- Main gallery view (Home) -->
         <ul id="main-gallery" class="gallery">
             <!-- Gallery items will be dynamically generated here -->
+        </ul>
+
+        <!-- Masonry Gallery view (Gallery page) -->
+        <ul id="masonry-gallery-view" class="masonry-gallery" style="display: none;">
+            <!-- Masonry gallery items will be generated here -->
         </ul>
 
         <!-- Artwork detail view -->
         <div id="artwork-detail" class="artwork-detail">
             <!-- Artwork details will be dynamically injected here -->
+        </div>
+
+        <!-- Contact view -->
+        <div id="contact-view" class="contact-view" style="display: none;">
+            <div class="contact-content">
+                <h2>Get In Touch</h2>
+                <p class="contact-intro">Thank you for your interest in my work. I'd love to hear from you! Whether you have questions about a piece, want to discuss a commission, or just want to say hello, feel free to reach out.</p>
+                
+                <div class="contact-methods">
+                    <div class="contact-method">
+                        <h3>Email</h3>
+                        <a href="mailto:serhat02@live.de" class="contact-link">serhat02@live.de</a>
+                    </div>
+                    
+                    <div class="contact-method">
+                        <h3>Phone</h3>
+                        <a href="tel:+491637042707" class="contact-link">+49 163 7042707</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </main>
 
@@ -394,7 +580,7 @@
                 name: "INNER CHILD",
                 year: "2026",
                 medium: "Oil on Canvas",
-                size: "TBD",
+                size: "107cm x 145cm",
                 description: "The Revival of the innocence and Divine Essence within us all.",
                 price: "PRICE ON REQUEST"
             },
@@ -469,7 +655,7 @@
         const imageSources = {
             "inner-child": {
                 gallery: "https://i.imgur.com/0QJ51WQ.jpeg",
-                detail: "https://i.imgur.com/0QJ51WQ.jpeg"
+                detail: "https://i.imgur.com/3nr8GlR.jpeg"
             },
             "ts-v-ye": {
                 gallery: "https://i.imgur.com/BvtFNyO.jpeg",
@@ -527,13 +713,80 @@
             }
         }
 
+        // Function to create masonry gallery items - ONLY shows secondary/detail images
+        function createMasonryGalleryItems() {
+            const masonryList = document.getElementById('masonry-gallery-view');
+            masonryList.innerHTML = '';
+            
+            // Neue Bilder die oben erscheinen sollen (in der Reihenfolge)
+            const additionalImages = [
+                "https://i.imgur.com/JtJzuww.jpeg",
+                "https://i.imgur.com/l2o7p7I.jpeg",
+                "https://i.imgur.com/1bstcAM.jpeg",
+                "https://i.imgur.com/VmSa6Af.jpeg",
+                "https://i.imgur.com/qPqwgif.jpeg",
+                "https://i.imgur.com/7DtdlLq.jpeg",
+                "https://i.imgur.com/Q0wFw4m.jpeg",
+                "https://i.imgur.com/LfpIuA5.jpeg"
+            ];
+            
+            // Zuerst die neuen Bilder hinzufügen
+            additionalImages.forEach((imageSrc, index) => {
+                const listItem = document.createElement('li');
+                listItem.className = 'masonry-item';
+                listItem.setAttribute('data-artwork-id', `additional-${index}`);
+                
+                listItem.innerHTML = `
+                    <img src="${imageSrc}" alt="Gallery Image ${index + 1}" loading="lazy" onerror="this.onerror=null;this.src='https://placehold.co/500x500/A0A0A0/ffffff?text=Image+Not+Found'">
+                `;
+                
+                // Klick öffnet nur Fullscreen-Ansicht
+                listItem.addEventListener('click', () => openFullscreenView(imageSrc));
+                masonryList.appendChild(listItem);
+            });
+            
+            // Dann die bestehenden Kunstwerke hinzufügen
+            for (const key in artworks) {
+                // Skip "air-before-2016" artwork
+                if (key === 'air-before-2016') {
+                    continue;
+                }
+                
+                // ONLY include artworks that have BOTH gallery and detail images (secondary images)
+                const imageSource = imageSources[key];
+                
+                // Skip if this artwork doesn't have separate gallery and detail images
+                if (typeof imageSource !== 'object' || !imageSource.detail) {
+                    continue;
+                }
+                
+                const artwork = artworks[key];
+                const listItem = document.createElement('li');
+                listItem.className = 'masonry-item';
+                listItem.setAttribute('data-artwork-id', key);
+
+                // Use the DETAIL image (secondary image) for the gallery view
+                const imageSrc = imageSource.detail;
+
+                listItem.innerHTML = `
+                    <img src="${imageSrc}" alt="${artwork.name}" loading="lazy" onerror="this.onerror=null;this.src='https://placehold.co/500x500/A0A0A0/ffffff?text=Image+Not+Found'">
+                `;
+                
+                // Klick öffnet nur Fullscreen-Ansicht, keine Detailansicht
+                listItem.addEventListener('click', () => openFullscreenView(imageSrc));
+                masonryList.appendChild(listItem);
+            }
+        }
+
         // Function to show the artwork details
         function showArtworkDetail(id) {
             // Push a history state so the browser Back button returns to the gallery
             history.pushState({ view: 'detail', id }, '', `#artwork-${id}`);
 
-            const gallery = document.getElementById('main-gallery');
+            const mainGallery = document.getElementById('main-gallery');
+            const masonryGallery = document.getElementById('masonry-gallery-view');
             const detailView = document.getElementById('artwork-detail');
+            const container = document.querySelector('.gallery-container');
             const artwork = artworks[id];
 
             if (!artwork) {
@@ -574,22 +827,92 @@
                 </div>
             `;
 
-            gallery.style.display = 'none';
+            mainGallery.style.display = 'none';
+            masonryGallery.style.display = 'none';
             detailView.style.display = 'block';
+            container.classList.remove('full-width');
             window.scrollTo(0, 0);
         }
 
-        // Function to go back to the gallery
-        function showGallery() {
-            // Ensure we have a base gallery state so Back does not leave the site
-            if (!history.state || history.state.view !== 'gallery') {
-                history.pushState({ view: 'gallery' }, '', location.pathname);
-            }
-
-            const gallery = document.getElementById('main-gallery');
+        // Function to show home (the gallery view on index.html)
+        function showHome() {
+            const mainGallery = document.getElementById('main-gallery');
+            const masonryGallery = document.getElementById('masonry-gallery-view');
             const detailView = document.getElementById('artwork-detail');
-            gallery.style.display = 'grid';
+            const contactView = document.getElementById('contact-view');
+            const container = document.querySelector('.gallery-container');
+            
+            mainGallery.style.display = 'grid';
+            masonryGallery.style.display = 'none';
             detailView.style.display = 'none';
+            contactView.style.display = 'none';
+            container.classList.remove('full-width');
+            
+            updateNavigation('home');
+            window.scrollTo(0, 0);
+        }
+
+        // Function to show masonry gallery
+        function showMasonryGallery() {
+            const mainGallery = document.getElementById('main-gallery');
+            const masonryGallery = document.getElementById('masonry-gallery-view');
+            const detailView = document.getElementById('artwork-detail');
+            const contactView = document.getElementById('contact-view');
+            const container = document.querySelector('.gallery-container');
+            
+            mainGallery.style.display = 'none';
+            masonryGallery.style.display = 'block';
+            detailView.style.display = 'none';
+            contactView.style.display = 'none';
+            container.classList.add('full-width');
+            
+            // Create masonry items if not already created
+            if (masonryGallery.children.length === 0) {
+                createMasonryGalleryItems();
+            }
+            
+            updateNavigation('gallery');
+            window.scrollTo(0, 0);
+        }
+
+        // Function to go back to the gallery (used by logo and back navigation)
+        function showGallery(fromButton) {
+            showHome();
+        }
+
+        // Function to show contact page (placeholder for now)
+        function showContact() {
+            const mainGallery = document.getElementById('main-gallery');
+            const masonryGallery = document.getElementById('masonry-gallery-view');
+            const detailView = document.getElementById('artwork-detail');
+            const contactView = document.getElementById('contact-view');
+            const container = document.querySelector('.gallery-container');
+            
+            mainGallery.style.display = 'none';
+            masonryGallery.style.display = 'none';
+            detailView.style.display = 'none';
+            contactView.style.display = 'block';
+            container.classList.remove('full-width');
+            
+            updateNavigation('contact');
+            window.scrollTo(0, 0);
+        }
+
+        // Function to update navigation active state
+        function updateNavigation(activePage) {
+            // Remove active class from all nav links
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            
+            // Add active class only to the clicked page
+            if (activePage === 'home') {
+                document.getElementById('nav-home').classList.add('active');
+            } else if (activePage === 'gallery') {
+                document.getElementById('nav-gallery').classList.add('active');
+            } else if (activePage === 'contact') {
+                document.getElementById('nav-contact').classList.add('active');
+            }
         }
 
         // Function to open the fullscreen view
@@ -611,9 +934,11 @@
             const state = event.state;
             if (!state || state.view === 'gallery') {
                 // Show gallery when no state or gallery state
-                const gallery = document.getElementById('main-gallery');
+                const mainGallery = document.getElementById('main-gallery');
+                const masonryGallery = document.getElementById('masonry-gallery-view');
                 const detailView = document.getElementById('artwork-detail');
-                gallery.style.display = 'grid';
+                mainGallery.style.display = 'grid';
+                masonryGallery.style.display = 'none';
                 detailView.style.display = 'none';
                 return;
             }
@@ -640,7 +965,7 @@
                 }
             } else {
                 // Ensure gallery is visible on first load
-                showGallery();
+                showHome();
             }
         });
     </script>
