@@ -142,22 +142,17 @@
             position: relative;
             background: transparent;
             border-radius: 0;
-            overflow: hidden;
+            overflow: visible;
             box-shadow: none;
             transition: transform 0.3s ease;
             text-align: center;
             cursor: pointer;
-
-            /* Center the content horizontally in the item */
             display: flex;
             flex-direction: column;
             align-items: center;
-
-        
-            aspect-ratio: 1 / 1;
             box-sizing: border-box;
             padding: 12px;
-            justify-content: center;
+            justify-content: flex-start;
         }
         
         .artwork-item:hover {
@@ -173,13 +168,51 @@
 
         /* ✅ NUR DIESE LANDINGPAGE-ÄNDERUNG:
            Bilder füllen die Kachel gleichmäßig, ohne beschnitten zu werden */
+        .artwork-image-container {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
         .artwork-image {
             width: 100%;
             height: 100%;
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;   /* KEIN CROPPING */
+            object-fit: contain;
             display: block;
+        }
+
+        .artwork-info {
+            width: 100%;
+            padding: 0.35rem 0 0;
+            text-align: left;
+        }
+
+        .artwork-info-name {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', 'Helvetica Neue', Helvetica, Arial;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .artwork-info-meta {
+            font-size: 0.7rem;
+            font-weight: 300;
+            color: #666;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', 'Helvetica Neue', Helvetica, Arial;
+        }
+
+        .artwork-info-price {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-top: 0.1rem;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', 'Helvetica Neue', Helvetica, Arial;
         }
 
         /* Using Apple SF */
@@ -315,13 +348,13 @@
         .contact-link {
             font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', 'Helvetica Neue', Helvetica, Arial;
             font-size: 1.1rem;
-            color: #ff69b4;
+            color: #000;
             text-decoration: none;
             transition: color 0.3s ease;
         }
 
         .contact-link:hover {
-            color: #ff1493;
+            color: #333;
             text-decoration: underline;
         }
 
@@ -441,7 +474,7 @@
         }
 
         .nav-link.active {
-            color: #ff69b4;
+            color: #000;
         }
 
         /* Masonry gallery styles - CJ Hendry inspired clean grid */
@@ -493,6 +526,59 @@
                 column-count: 1;
             }
         }
+
+        .carousel-container {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .carousel-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.85);
+            border: none;
+            border-radius: 50%;
+            width: 28px;
+            height: 28px;
+            font-size: 18px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            user-select: none;
+            transition: background 0.2s ease;
+            padding: 0;
+            color: #333;
+        }
+
+        .carousel-arrow:hover { background: rgba(255,255,255,1); }
+        .carousel-arrow.prev { left: 6px; }
+        .carousel-arrow.next { right: 6px; }
+
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+            margin-top: 5px;
+        }
+
+        .carousel-dot {
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: #ccc;
+            transition: background 0.2s;
+        }
+
+        .carousel-dot.active { background: #333; }
+
     </style>
 </head>
 <body>
@@ -576,13 +662,29 @@
     <script>
         // Use a single JavaScript object to hold all artwork data
         const artworks = {
+            "lv-starbucks-japan": {
+                name: "LOUIS VUITTON X STARBUCKS JAPAN EDITION",
+                year: "2026",
+                medium: "AQUARELLE",
+                size: "GRANDE",
+                description: "",
+                price: "4,380,000,000$"
+            },
+            "spiritual-awakening": {
+                name: "SPIRITUAL AWAKENING",
+                year: "2026",
+                medium: "Oil on Canvas",
+                size: "100cm x 75cm",
+                description: "",
+                price: "SOLD"
+            },
             "inner-child": {
                 name: "INNER CHILD",
                 year: "2026",
                 medium: "Oil on Canvas",
                 size: "107cm x 145cm",
                 description: "The Revival of the innocence and Divine Essence within us all.",
-                price: "PRICE ON REQUEST"
+                price: "1,837,048,030$"
             },
             "ts-v-ye": {
                 name: "Taylor Swift v Ye",
@@ -590,7 +692,7 @@
                 medium: "Mixed Media on canvas Paper",
                 size: "105cm x 198cm",
                 description: "A colorful and explosive portrayal of two controversial figures.",
-                price: "PRICE ON REQUEST"
+                price: "3,927,293,900$"
             },
             "wonderful-again": {
                 name: "Make America Wonderful Again",
@@ -598,7 +700,7 @@
                 medium: "Mixed Media on Paper",
                 size: "35.5cm x 27.7cm",
                 description: "What America thinks of itself.",
-                price: "PRICE ON REQUEST"
+                price: "2,392,932,392$"
             },
             "damaged": {
                 name: "Damaged",
@@ -606,7 +708,7 @@
                 medium: "Mixed Media on Cotton Board",
                 size: "50cm x 50cm",
                 description: "An abstract display of Trump and his 'damaged' mind.",
-                price: "PRICE ON REQUEST"
+                price: "6,342,234,533$"
             },
             "batman-kills": {
                 name: "BATMAN KILLS",
@@ -614,7 +716,7 @@
                 medium: "Mixed Media on Cotton Board",
                 size: "147mm x 66mm",
                 description: "Depiction of an Emirati banknote with a controversial opinion about the Dark Knight.",
-                price: "RESERVED"
+                price: "1,393,930,020$"
             },
             "itaped": {
                 name: "iTaped",
@@ -622,7 +724,7 @@
                 medium: "Colored Pencil on Cotton Board",
                 size: "50cm x 50cm",
                 description: "A experimental Version of the famous Comedian with a Twist that remembers Apple's innovative and long lost \"i\"",
-                price: "PRICE ON REQUEST"
+                price: "2,303,943,939$"
             },
             "kal-el-no": {
                 name: "KAL EL NO",
@@ -630,7 +732,7 @@
                 medium: "Mixed Media on canvas Paper",
                 description: "Gal Gadots Famous and terrible line in Zack Snyders Justice League painted with political flair",
                 size: "20cm x 20cm",
-                price: "PRICE ON REQUEST"
+                price: "2,302,049,944$"
             },
             "free-will-and-capitalism": {
                 name: "FREE WILL AND CAPITALISM",
@@ -638,7 +740,7 @@
                 medium: "Mixed Media on Paper",
                 size: "50cm x 50cm",
                 description: "Walmart and its sudden state of being a playground for Viral Social Media Content",
-                price: "PRICE ON REQUEST"
+                price: "4,323,293,000$"
             },
             "air-before-2016": {
                 name: "AIR BEFORE 2016",
@@ -647,12 +749,21 @@
                 size: "N/A",
                 // UPDATED DESCRIPTION
                 description: "Unique Air of a Time without Division, Minimalism and Mediocrity",
-                price: "PRICE ON REQUEST"
+                price: "9,999,999,999$"
             }
         };
 
         // This object holds the links to the images.
         const imageSources = {
+            "lv-starbucks-japan": {
+                gallery: [
+                    "https://i.imgur.com/3CuEPDq.jpeg",
+                    "https://i.imgur.com/PSRI6rW.jpeg",
+                    "https://i.imgur.com/k9EDH5t.jpeg"
+                ],
+                detail: "https://i.imgur.com/3CuEPDq.jpeg"
+            },
+            "spiritual-awakening": "https://i.imgur.com/2SrIs8r.jpeg",
             "inner-child": {
                 gallery: "https://i.imgur.com/0QJ51WQ.jpeg",
                 detail: "https://i.imgur.com/3nr8GlR.jpeg"
@@ -697,16 +808,44 @@
                 listItem.className = 'artwork-item';
                 listItem.setAttribute('data-artwork-id', key);
 
-                // Check if the image source is an object with a 'gallery' property
-                const imageSrc = (typeof imageSources[key] === 'object' && imageSources[key].gallery)
-                                 ? imageSources[key].gallery
-                                 : (imageSources[key] || 'https://placehold.co/500x500/A0A0A0/ffffff?text=Image+Not+Found');
+                const imageSource = imageSources[key];
+                const isCarousel = typeof imageSource === 'object' && Array.isArray(imageSource.gallery);
 
-                // *** NEU: Entfernen des Titels aus der Hauptgalerie-Ansicht (via CSS display: none) ***
-                listItem.innerHTML = `
-                    <img src="${imageSrc}" alt="${artwork.name}" class="artwork-image" onerror="this.onerror=null;this.src='https://placehold.co/500x500/A0A0A0/ffffff?text=Image+Not+Found'">
-                    <div class="artwork-title"></div> 
-                `;
+                if (isCarousel) {
+                    const images = imageSource.gallery;
+                    const carouselId = `carousel-${key}`;
+                    listItem.innerHTML = `
+                        <div class="carousel-container" id="${carouselId}">
+                            <img src="${images[0]}" alt="${artwork.name}" class="artwork-image"
+                                 data-images='${JSON.stringify(images)}' data-index="0"
+                                 onerror="this.onerror=null;this.src='https://placehold.co/500x500/A0A0A0/ffffff?text=Image+Not+Found'">
+                            <button class="carousel-arrow prev" onclick="carouselPrev('${carouselId}', event)">&#8249;</button>
+                            <button class="carousel-arrow next" onclick="carouselNext('${carouselId}', event)">&#8250;</button>
+                        </div>
+                        <div class="carousel-dots">
+                            ${images.map((_, i) => `<span class="carousel-dot${i === 0 ? ' active' : ''}" id="${carouselId}-dot-${i}"></span>`).join('')}
+                        </div>
+                        <div class="artwork-info">
+                            <div class="artwork-info-name">${artwork.name}</div>
+                            <div class="artwork-info-meta">${artwork.year} · ${artwork.medium}${artwork.size ? ' · ' + artwork.size : ''}</div>
+                            <div class="artwork-info-price">${artwork.price}</div>
+                        </div>
+                    `;
+                } else {
+                    const imageSrc = (typeof imageSource === 'object' && imageSource.gallery)
+                                     ? imageSource.gallery
+                                     : (imageSource || 'https://placehold.co/500x500/A0A0A0/ffffff?text=Image+Not+Found');
+                    listItem.innerHTML = `
+                        <div class="artwork-image-container">
+                            <img src="${imageSrc}" alt="${artwork.name}" class="artwork-image" onerror="this.onerror=null;this.src='https://placehold.co/500x500/A0A0A0/ffffff?text=Image+Not+Found'">
+                        </div>
+                        <div class="artwork-info">
+                            <div class="artwork-info-name">${artwork.name}</div>
+                            <div class="artwork-info-meta">${artwork.year} · ${artwork.medium}${artwork.size ? ' · ' + artwork.size : ''}</div>
+                            <div class="artwork-info-price">${artwork.price}</div>
+                        </div>
+                    `;
+                }
                 
                 listItem.addEventListener('click', () => showArtworkDetail(key));
                 galleryList.appendChild(listItem);
@@ -720,6 +859,15 @@
             
             // Neue Bilder die oben erscheinen sollen (in der Reihenfolge)
             const additionalImages = [
+                "https://i.imgur.com/NmNfEfD.jpeg",
+                "https://i.imgur.com/NwrJQ0y.jpeg",
+                "https://i.imgur.com/7YKcguq.jpeg",
+                "https://i.imgur.com/JWLZ37i.jpeg",
+                "https://i.imgur.com/SH1UQwW.jpeg",
+                "https://i.imgur.com/DIgrfQM.jpeg",
+                "https://i.imgur.com/iy0zPK1.jpeg",
+                "https://i.imgur.com/60f8D5z.jpeg",
+                "https://i.imgur.com/lJEOYqH.jpeg",
                 "https://i.imgur.com/JtJzuww.jpeg",
                 "https://i.imgur.com/l2o7p7I.jpeg",
                 "https://i.imgur.com/1bstcAM.jpeg",
@@ -796,38 +944,58 @@
                 return;
             }
 
-            // Check if the image source is an object with a 'detail' property
-            const imageSrc = (typeof imageSources[id] === 'object' && imageSources[id].detail)
-                             ? imageSources[id].detail
-                             : (imageSources[id] || 'https://placehold.co/500x500/A0A0A0/ffffff?text=Image+Not+Found');
+            const imageSource = imageSources[id];
+            const isCarousel = typeof imageSource === 'object' && Array.isArray(imageSource.gallery);
 
-            // HIER WIRD DER INHALT DER DETAIL-ANSICHT NEU STRUKTURIERT (Titel bleibt hier erhalten!)
+            let imageHTML;
+            if (isCarousel) {
+                const images = imageSource.gallery;
+                const carouselId = `detail-carousel-${id}`;
+                imageHTML = `
+                    <div id="${carouselId}" style="position:relative; max-width:560px; margin:0 auto 0;">
+                        <img src="${images[0]}" alt="${artwork.name}" class="detail-image ${id === 'itaped' ? 'large-detail itaped-adjust' : ''}"
+                             data-images='${JSON.stringify(images)}' data-index="0"
+                             id="${carouselId}-img"
+                             onclick="openFullscreenView(this.src)"
+                             onerror="this.onerror=null;this.src='https://placehold.co/800x600/A0A0A0/ffffff?text=Image+Not+Found'">
+                        <button class="carousel-arrow prev" style="top:45%;" onclick="carouselPrev('${carouselId}', event)">&#8249;</button>
+                        <button class="carousel-arrow next" style="top:45%;" onclick="carouselNext('${carouselId}', event)">&#8250;</button>
+                    </div>
+                    <div class="carousel-dots" style="margin-bottom:0.5rem;">
+                        ${images.map((_, i) => `<span class="carousel-dot${i === 0 ? ' active' : ''}" id="${carouselId}-dot-${i}"></span>`).join('')}
+                    </div>
+                `;
+            } else {
+                const imageSrc = (typeof imageSource === 'object' && imageSource.detail)
+                                 ? imageSource.detail
+                                 : (imageSource || 'https://placehold.co/500x500/A0A0A0/ffffff?text=Image+Not+Found');
+                imageHTML = `<img src="${imageSrc}" alt="${artwork.name}" class="detail-image ${id === 'itaped' ? 'large-detail itaped-adjust' : ''}" onclick="openFullscreenView('${imageSrc}')" onerror="this.onerror=null;this.src='https://placehold.co/800x600/A0A0A0/ffffff?text=Image+Not+Found'">`;
+            }
+
             detailView.innerHTML = `
-                <img src="${imageSrc}" alt="${artwork.name}" class="detail-image ${id === 'itaped' ? 'large-detail itaped-adjust' : ''}" onclick="openFullscreenView('${imageSrc}')" onerror="this.onerror=null;this.src='https://placehold.co/800x600/A0A0A0/ffffff?text=Image+Not+Found'">
-                
+                ${imageHTML}
                 <div class="detail-info">
                     <div>
-                        <!-- 1. Title (One line enforced by CSS, remains visible here) -->
                         <h2>${artwork.name}</h2>
-                        
-                        <!-- 2. Description (Now between Title and details) -->
                         <div style="margin-bottom: 1.5rem; font-weight: 300; font-style: italic; line-height: 1.5;">${artwork.description || ''}</div>
-                        
-                        <!-- 3. Details -->
                         <strong>Year:</strong> <span>${artwork.year}</span><br>
                         <strong>Medium:</strong> <span>${artwork.medium}</span><br>
                         <strong>Size:</strong> <span>${artwork.size}</span>
-                        
-                        <!-- 4. Price (Now under Size) -->
                         <div class="price-line" style="margin-top: 0.5rem; font-weight: 600; color: var(--primary-color);">${artwork.price}</div>
-                        
                     </div>
-                    <!-- Right column is now empty as all primary info is in the first column -->
-                    <div>
-                        
-                    </div>
+                    <div></div>
                 </div>
             `;
+
+            if (isCarousel) {
+                const carouselId = `detail-carousel-${id}`;
+                const images = imageSource.gallery;
+                const img = document.getElementById(`${carouselId}-img`);
+                if (img) {
+                    img.dataset.images = JSON.stringify(images);
+                    img.dataset.index = '0';
+                }
+            }
 
             mainGallery.style.display = 'none';
             masonryGallery.style.display = 'none';
@@ -950,6 +1118,24 @@
                 showArtworkDetail(state.id);
             }
         });
+
+        function carouselNav(carouselId, direction, event) {
+            event.stopPropagation();
+            const container = document.getElementById(carouselId);
+            const img = container.querySelector('img');
+            const images = JSON.parse(img.dataset.images);
+            let index = parseInt(img.dataset.index);
+            index = (index + direction + images.length) % images.length;
+            img.src = images[index];
+            img.dataset.index = index;
+            for (let i = 0; i < images.length; i++) {
+                const dot = document.getElementById(`${carouselId}-dot-${i}`);
+                if (dot) dot.classList.toggle('active', i === index);
+            }
+        }
+
+        function carouselPrev(carouselId, event) { carouselNav(carouselId, -1, event); }
+        function carouselNext(carouselId, event) { carouselNav(carouselId, 1, event); }
 
         document.addEventListener('DOMContentLoaded', () => {
             createGalleryItems();
