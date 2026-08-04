@@ -606,6 +606,7 @@
         <a href="#" class="nav-link" id="nav-home" onclick="showHome(); return false;">Home</a>
         <a href="#" class="nav-link" id="nav-gallery" onclick="showMasonryGallery(); return false;">Gallery</a>
         <a href="#" class="nav-link" id="nav-contact" onclick="showContact(); return false;">Contact</a>
+        <a href="portfolio.pdf" class="nav-link" download="Serhat_Yuecel_Portfolio.pdf">Portfolio</a>
     </nav>
 
     <main class="gallery-container">
@@ -627,19 +628,8 @@
         <!-- Contact view -->
         <div id="contact-view" class="contact-view" style="display: none;">
             <div class="contact-content">
-                <h2>Get In Touch</h2>
-                <p class="contact-intro">Thank you for your interest in my work. I'd love to hear from you! Whether you have questions about a piece, want to discuss a commission, or just want to say hello, feel free to reach out.</p>
-                
-                <div class="contact-methods">
-                    <div class="contact-method">
-                        <h3>Email</h3>
-                        <a href="mailto:serhat02@live.de" class="contact-link">serhat02@live.de</a>
-                    </div>
-                    
-                    <div class="contact-method">
-                        <h3>Phone</h3>
-                        <a href="tel:+491637042707" class="contact-link">+49 163 7042707</a>
-                    </div>
+                <div style="text-align: center; margin-top: 2rem;">
+                    <a href="mailto:serhat02@live.de" class="contact-link">serhat02@live.de</a>
                 </div>
             </div>
         </div>
@@ -654,22 +644,14 @@
     </footer>
 
     <!-- Fullscreen Image Viewer -->
-    <div id="fullscreen-overlay" class="fullscreen-overlay">
-        <span class="close-button" onclick="closeFullscreenView()">&times;</span>
-        <img id="fullscreen-image" class="fullscreen-image" src="" alt="">
+    <div id="fullscreen-overlay" class="fullscreen-overlay" onclick="closeFullscreenView()">
+        <span class="close-button">&times;</span>
+        <img id="fullscreen-image" class="fullscreen-image" src="" alt="" onclick="event.stopPropagation()">
     </div>
 
     <script>
         // Use a single JavaScript object to hold all artwork data
         const artworks = {
-            "lv-starbucks-japan": {
-                name: "LOUIS VUITTON X STARBUCKS JAPAN EDITION",
-                year: "2026",
-                medium: "AQUARELLE",
-                size: "GRANDE",
-                description: "",
-                price: "4,380,000,000$"
-            },
             "spiritual-awakening": {
                 name: "SPIRITUAL AWAKENING",
                 year: "2026",
@@ -755,14 +737,6 @@
 
         // This object holds the links to the images.
         const imageSources = {
-            "lv-starbucks-japan": {
-                gallery: [
-                    "https://i.imgur.com/3CuEPDq.jpeg",
-                    "https://i.imgur.com/PSRI6rW.jpeg",
-                    "https://i.imgur.com/k9EDH5t.jpeg"
-                ],
-                detail: "https://i.imgur.com/3CuEPDq.jpeg"
-            },
             "spiritual-awakening": "https://i.imgur.com/2SrIs8r.jpeg",
             "inner-child": {
                 gallery: "https://i.imgur.com/0QJ51WQ.jpeg",
